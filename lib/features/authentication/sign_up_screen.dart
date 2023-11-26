@@ -19,7 +19,7 @@ class SignUpScreen extends StatelessWidget {
             children: [
               Gaps.v80,
               const Text(
-                'Sign up fr TikTok',
+                'Sign up for TikTok',
                 style: TextStyle(
                   fontSize: Sizes.size24,
                   fontWeight: FontWeight.w700,

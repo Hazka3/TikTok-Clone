@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/authentication/username_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -9,6 +10,14 @@ class LoginScreen extends StatelessWidget {
 
   void _onSignupTap(BuildContext context) {
     Navigator.of(context).pop();
+  }
+
+  void _onEmailTap(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const UsernameScreen(),
+      ),
+    );
   }
 
   @override
@@ -39,24 +48,27 @@ class LoginScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               Gaps.v40,
-              const AuthButton(
+              AuthButton(
+                tapButton: _onEmailTap,
                 text: "Use phone / email / username",
-                icon: FaIcon(
+                icon: const FaIcon(
                   FontAwesomeIcons.user,
                 ),
               ),
               Gaps.v16,
-              const AuthButton(
+              AuthButton(
+                tapButton: _onEmailTap,
                 text: "Continue with Facebook",
-                icon: FaIcon(
+                icon: const FaIcon(
                   FontAwesomeIcons.facebook,
                   color: Color(0xFF1877F2),
                 ),
               ),
               Gaps.v16,
-              const AuthButton(
+              AuthButton(
+                tapButton: _onEmailTap,
                 text: "Continue with Google",
-                icon: FaIcon(
+                icon: const FaIcon(
                   FontAwesomeIcons.google,
                 ),
               ),

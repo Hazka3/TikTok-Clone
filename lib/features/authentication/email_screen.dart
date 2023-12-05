@@ -105,7 +105,7 @@ class _EmailScreenState extends State<EmailScreen> {
                 ),
                 cursorColor: Theme.of(context).primaryColor,
               ),
-              Gaps.v16,
+              Gaps.v28,
               GestureDetector(
                 onTap: _onSubmit,
                 child: FormButton(

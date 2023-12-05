@@ -90,6 +90,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
               ),
               Gaps.v16,
               TextField(
+                obscureText: true,
                 onEditingComplete: _onSubmit,
                 controller: _passwordController,
                 decoration: InputDecoration(

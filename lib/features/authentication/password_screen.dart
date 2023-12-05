@@ -43,6 +43,10 @@ class _PasswordScreenState extends State<PasswordScreen> {
     );
   }
 
+  void _onClearTap() {
+    _passwordController.clear();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -92,10 +96,13 @@ class _PasswordScreenState extends State<PasswordScreen> {
                   suffix: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      FaIcon(
-                        FontAwesomeIcons.solidCircleXmark,
-                        color: Colors.grey.shade400,
-                        size: Sizes.size20,
+                      GestureDetector(
+                        onTap: _onClearTap,
+                        child: FaIcon(
+                          FontAwesomeIcons.solidCircleXmark,
+                          color: Colors.grey.shade400,
+                          size: Sizes.size20,
+                        ),
                       ),
                       Gaps.h16,
                       FaIcon(

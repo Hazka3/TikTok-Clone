@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
-import 'package:tiktok_clone/features/authentication/email_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/form_button.dart';
+import 'package:tiktok_clone/features/onboarding/interests_screen.dart';
 
 class BirthdayScreen extends StatefulWidget {
   const BirthdayScreen({super.key});
@@ -13,16 +15,15 @@ class BirthdayScreen extends StatefulWidget {
 
 class _BirthdayScreenState extends State<BirthdayScreen> {
   final TextEditingController _birthdayController = TextEditingController();
-  String _birthday = "";
+
+  late DateTime initialDate;
 
   @override
   void initState() {
     super.initState();
-    _birthdayController.addListener(() {
-      setState(() {
-        _birthday = _birthdayController.text;
-      });
-    });
+    DateTime now = DateTime.now();
+    initialDate = DateTime(now.year - 12);
+    _setTextFieldDate(initialDate);
   }
 
   @override
@@ -32,12 +33,16 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
   }
 
   void _onNextTap() {
-    if (_birthday.isEmpty) return;
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => const EmailScreen(),
+        builder: (context) => const InterestsScreen(),
       ),
     );
+  }
+
+  void _setTextFieldDate(DateTime date) {
+    final textDate = DateFormat("d MMMM yyyy").format(date);
+    _birthdayController.value = TextEditingValue(text: textDate);
   }
 
   @override
@@ -92,11 +97,22 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
             Gaps.v28,
             GestureDetector(
               onTap: _onNextTap,
-              child: FormButton(
-                disabled: _birthday.isEmpty,
+              child: const FormButton(
+                disabled: false,
               ),
             ),
           ],
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: SizedBox(
+          height: 300,
+          child: CupertinoDatePicker(
+            mode: CupertinoDatePickerMode.date,
+            maximumDate: initialDate,
+            initialDateTime: initialDate,
+            onDateTimeChanged: _setTextFieldDate,
+          ),
         ),
       ),
     );

@@ -13,6 +13,16 @@ class LoginFormScreen extends StatefulWidget {
 class _LoginFormScreenState extends State<LoginFormScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  Map<String, String> formData = {};
+
+  void _onSubmitTap() {
+    if (_formKey.currentState != null) {
+      if (_formKey.currentState!.validate()) {
+        _formKey.currentState!.save();
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,20 +39,62 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
             children: [
               Gaps.v28,
               TextFormField(
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   hintText: 'Email',
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.grey.shade400,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.grey.shade400,
+                    ),
+                  ),
                 ),
+                cursorColor: Theme.of(context).primaryColor,
+                validator: (value) {
+                  return null;
+                },
+                onSaved: (newValue) {
+                  if (newValue != null) {
+                    formData['email'] = newValue;
+                  }
+                },
               ),
               Gaps.v16,
               TextFormField(
-                decoration: const InputDecoration(
+                obscureText: true,
+                decoration: InputDecoration(
                   hintText: 'Password',
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.grey.shade400,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.grey.shade400,
+                    ),
+                  ),
                 ),
+                cursorColor: Theme.of(context).primaryColor,
+                validator: (value) {
+                  return null;
+                },
+                onSaved: (newValue) {
+                  if (newValue != null) {
+                    formData['password'] = newValue;
+                  }
+                },
               ),
               Gaps.v28,
-              const FormButton(
-                disabled: false,
-                button_text: 'Log in',
+              GestureDetector(
+                onTap: _onSubmitTap,
+                child: const FormButton(
+                  disabled: false,
+                  button_text: 'Log in',
+                ),
               ),
             ],
           ),

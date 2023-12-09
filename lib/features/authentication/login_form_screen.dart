@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
 class LoginFormScreen extends StatefulWidget {
@@ -15,9 +16,19 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
       appBar: AppBar(
         title: const Text('Log in'),
       ),
-      body: const Padding(
-        padding: EdgeInsets.symmetric(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(
           horizontal: Sizes.size36,
+        ),
+        child: Form(
+          child: Column(
+            children: [
+              TextFormField(),
+              Gaps.v16,
+              TextFormField(),
+              Gaps.v28,
+            ],
+          ),
         ),
       ),
     );

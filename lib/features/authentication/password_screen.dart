@@ -181,6 +181,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                 child: FormButton(
                   disabled:
                       !_isPasswordLengthValid() || !_isPasswordLettersValid(),
+                  button_text: 'Next',
                 ),
               ),
             ],

@@ -11,6 +11,8 @@ class LoginFormScreen extends StatefulWidget {
 }
 
 class _LoginFormScreenState extends State<LoginFormScreen> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,11 +24,21 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
           horizontal: Sizes.size36,
         ),
         child: Form(
+          key: _formKey,
           child: Column(
             children: [
-              TextFormField(),
+              Gaps.v28,
+              TextFormField(
+                decoration: const InputDecoration(
+                  hintText: 'Email',
+                ),
+              ),
               Gaps.v16,
-              TextFormField(),
+              TextFormField(
+                decoration: const InputDecoration(
+                  hintText: 'Password',
+                ),
+              ),
               Gaps.v28,
               const FormButton(
                 disabled: false,

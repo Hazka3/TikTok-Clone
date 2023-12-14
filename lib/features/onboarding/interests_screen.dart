@@ -53,7 +53,7 @@ class InterestsScreen extends StatelessWidget {
         title: const Text("Choose your interests"),
       ),
       bottomNavigationBar: BottomAppBar(
-        elevation: 1,
+        elevation: 2,
         child: Padding(
           padding: const EdgeInsets.only(
             bottom: Sizes.size40,

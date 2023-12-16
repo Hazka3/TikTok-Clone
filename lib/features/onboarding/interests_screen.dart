@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/onboarding/widgets/interest_button.dart';
 
 class InterestsScreen extends StatefulWidget {
   const InterestsScreen({super.key});
@@ -129,32 +130,7 @@ class _InterestsScreenState extends State<InterestsScreen> {
                   spacing: 15,
                   children: [
                     for (var interest in interests)
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: Sizes.size16,
-                          horizontal: Sizes.size24,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(
-                            color: Colors.black.withOpacity(0.1),
-                          ),
-                          borderRadius: BorderRadius.circular(Sizes.size32),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.05),
-                              blurRadius: 5,
-                              spreadRadius: 5,
-                            ),
-                          ],
-                        ),
-                        child: Text(
-                          interest,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
+                      InterestsButton(interest: interest),
                   ],
                 ),
               ],

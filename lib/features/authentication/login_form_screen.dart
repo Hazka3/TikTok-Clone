@@ -20,10 +20,14 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
     if (_formKey.currentState != null) {
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
-        Navigator.of(context).push(
+        Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
             builder: (context) => const InterestsScreen(),
           ),
+          (route) {
+            print(route);
+            return true;
+          },
         );
       }
     }
@@ -60,6 +64,9 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                 ),
                 cursorColor: Theme.of(context).primaryColor,
                 validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Check your email!";
+                  }
                   return null;
                 },
                 onSaved: (newValue) {
@@ -86,6 +93,9 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                 ),
                 cursorColor: Theme.of(context).primaryColor,
                 validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Check your Password!";
+                  }
                   return null;
                 },
                 onSaved: (newValue) {

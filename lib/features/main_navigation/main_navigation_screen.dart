@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/main_navigation/widgets/nav_tab.dart';
+import 'package:tiktok_clone/features/main_navigation/widgets/post_video_button.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -13,10 +13,30 @@ class MainNavigationScreen extends StatefulWidget {
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _selectedIndex = 0;
+  bool inverted = false;
 
   void _onTap(int index) {
     setState(() {
       _selectedIndex = index;
+    });
+  }
+
+  void _onPostVideoButtonTap() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => Scaffold(
+          appBar: AppBar(
+            title: const Text('Record video,'),
+          ),
+        ),
+        fullscreenDialog: true,
+      ),
+    );
+  }
+
+  void _onPostVideoButtonHold(detail) {
+    setState(() {
+      inverted = !inverted;
     });
   }
 
@@ -51,6 +71,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               NavTab(
                 text: "Home",
@@ -65,6 +86,14 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 icon: FontAwesomeIcons.compass,
                 selectedIcon: FontAwesomeIcons.solidCompass,
                 onTap: () => _onTap(1),
+              ),
+              GestureDetector(
+                onTap: _onPostVideoButtonTap,
+                onTapDown: _onPostVideoButtonHold,
+                onTapUp: _onPostVideoButtonHold,
+                child: PostVideoButton(
+                  inverted: inverted,
+                ),
               ),
               NavTab(
                 text: "Inbox",

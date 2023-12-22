@@ -133,6 +133,7 @@ class _VideoPostState extends State<VideoPost>
             bottom: 30,
             left: 30,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   '@はづか',
@@ -142,7 +143,14 @@ class _VideoPostState extends State<VideoPost>
                     fontSize: Sizes.size20,
                   ),
                 ),
-                Gaps.v20,
+                Gaps.v10,
+                Text(
+                  "This is my first video!",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: Sizes.size16,
+                  ),
+                ),
               ],
             ),
           ),

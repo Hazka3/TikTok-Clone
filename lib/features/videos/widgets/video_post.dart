@@ -21,12 +21,10 @@ class VideoPost extends StatefulWidget {
 class _VideoPostState extends State<VideoPost>
     with SingleTickerProviderStateMixin {
   late final VideoPlayerController _videoPlayerController;
-
-  bool _isPause = false;
-
+  late final AnimationController _animationController;
   final Duration _animationDuration = const Duration(milliseconds: 200);
 
-  late final AnimationController _animationController;
+  bool _isPause = false;
 
   void _onVideoChange() {
     if (_videoPlayerController.value.isInitialized) {

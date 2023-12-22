@@ -26,6 +26,7 @@ class _VideoPostState extends State<VideoPost>
   final Duration _animationDuration = const Duration(milliseconds: 200);
 
   bool _isPause = false;
+  bool _isEllipsis = false;
 
   void _onVideoChange() {
     if (_videoPlayerController.value.isInitialized) {
@@ -62,6 +63,12 @@ class _VideoPostState extends State<VideoPost>
     }
     setState(() {
       _isPause = !_isPause;
+    });
+  }
+
+  void _toggleSeeMore() {
+    setState(() {
+      _isEllipsis = !_isEllipsis;
     });
   }
 
@@ -129,13 +136,13 @@ class _VideoPostState extends State<VideoPost>
               ),
             ),
           ),
-          const Positioned(
+          Positioned(
             bottom: 30,
-            left: 30,
+            left: 15,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   '@はづか',
                   style: TextStyle(
                     color: Colors.white,
@@ -144,13 +151,59 @@ class _VideoPostState extends State<VideoPost>
                   ),
                 ),
                 Gaps.v10,
-                Text(
+                const Text(
                   "This is my first video!",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: Sizes.size16,
                   ),
                 ),
+                Gaps.v5,
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 250,
+                      child: Text(
+                        '#googleearth #googlemaps #video #flutter #makeoverflow',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: Sizes.size16,
+                        ),
+                        overflow: _isEllipsis
+                            ? TextOverflow.fade
+                            : TextOverflow.ellipsis,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: _toggleSeeMore,
+                      child: _isEllipsis
+                          ? Container()
+                          : const Text(
+                              'See more',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: Sizes.size16,
+                              ),
+                            ),
+                    ),
+                  ],
+                ),
+                Gaps.v5,
+                _isEllipsis
+                    ? GestureDetector(
+                        onTap: _toggleSeeMore,
+                        child: const Text(
+                          ' See Less',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: Sizes.size16,
+                          ),
+                        ),
+                      )
+                    : Container(),
               ],
             ),
           ),

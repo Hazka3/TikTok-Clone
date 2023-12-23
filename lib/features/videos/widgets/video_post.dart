@@ -208,8 +208,18 @@ class _VideoPostState extends State<VideoPost>
             ),
           ),
           const Positioned(
+            bottom: 20,
+            right: 10,
             child: Column(
-              children: [],
+              children: [
+                CircleAvatar(
+                  radius: 25,
+                  backgroundColor: Colors.black,
+                  foregroundImage: NetworkImage(
+                    "https://avatars.githubusercontent.com/u/94900388?v=4",
+                  ),
+                ),
+              ],
             ),
           ),
         ],

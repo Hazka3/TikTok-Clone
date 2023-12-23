@@ -137,8 +137,8 @@ class _VideoPostState extends State<VideoPost>
             ),
           ),
           Positioned(
-            bottom: 30,
-            left: 15,
+            bottom: 20,
+            left: 10,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -205,6 +205,11 @@ class _VideoPostState extends State<VideoPost>
                       )
                     : Container(),
               ],
+            ),
+          ),
+          const Positioned(
+            child: Column(
+              children: [],
             ),
           ),
         ],

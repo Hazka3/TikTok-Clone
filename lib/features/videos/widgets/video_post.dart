@@ -210,12 +210,12 @@ class _VideoPostState extends State<VideoPost>
               ],
             ),
           ),
-          const Positioned(
+          Positioned(
             bottom: 20,
             right: 10,
             child: Column(
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 25,
                   backgroundColor: Colors.black,
                   foregroundImage: NetworkImage(
@@ -223,17 +223,20 @@ class _VideoPostState extends State<VideoPost>
                   ),
                 ),
                 Gaps.v24,
-                VideoButton(
+                const VideoButton(
                   icon: FontAwesomeIcons.solidHeart,
                   text: "2.9M",
                 ),
                 Gaps.v24,
-                VideoButton(
-                  icon: FontAwesomeIcons.solidComment,
-                  text: "33.0K",
+                GestureDetector(
+                  onTap: _onCommentsTap,
+                  child: const VideoButton(
+                    icon: FontAwesomeIcons.solidComment,
+                    text: "33.0K",
+                  ),
                 ),
                 Gaps.v24,
-                VideoButton(
+                const VideoButton(
                   icon: FontAwesomeIcons.share,
                   text: "Share",
                 ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_clone/constants/sizes.dart';
 
 class VideoComments extends StatefulWidget {
   const VideoComments({super.key});
@@ -15,18 +16,26 @@ class _VideoCommentsState extends State<VideoComments> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text("22796 comments"),
-        actions: [
-          IconButton(
-            onPressed: __onClosePressed,
-            icon: const FaIcon(
-              FontAwesomeIcons.xmark,
+    return Container(
+      clipBehavior: Clip.hardEdge,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(
+          Sizes.size14,
+        ),
+      ),
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: const Text("22796 comments"),
+          actions: [
+            IconButton(
+              onPressed: __onClosePressed,
+              icon: const FaIcon(
+                FontAwesomeIcons.xmark,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

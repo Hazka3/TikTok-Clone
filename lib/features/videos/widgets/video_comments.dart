@@ -62,9 +62,11 @@ class _VideoCommentsState extends State<VideoComments> {
           child: Stack(
             children: [
               ListView.separated(
-                padding: const EdgeInsets.symmetric(
-                  vertical: Sizes.size10,
-                  horizontal: Sizes.size16,
+                padding: const EdgeInsets.only(
+                  top: Sizes.size10,
+                  bottom: Sizes.size96 + Sizes.size20,
+                  left: Sizes.size16,
+                  right: Sizes.size16,
                 ),
                 itemCount: 10,
                 separatorBuilder: (context, index) => Gaps.v20,

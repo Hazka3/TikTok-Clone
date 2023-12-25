@@ -12,7 +12,10 @@ class VideoComments extends StatefulWidget {
 
 class _VideoCommentsState extends State<VideoComments> {
   final ScrollController _scrollController = ScrollController();
+  final TextEditingController _textEditingController = TextEditingController();
+
   bool _isWriting = false;
+  String _text = "";
 
   void __onClosePressed() {
     Navigator.of(context).pop();
@@ -28,6 +31,16 @@ class _VideoCommentsState extends State<VideoComments> {
   void _onStartWriting() {
     setState(() {
       _isWriting = true;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _textEditingController.addListener(() {
+      setState(() {
+        _text = _textEditingController.text;
+      });
     });
   }
 
@@ -150,6 +163,7 @@ class _VideoCommentsState extends State<VideoComments> {
                         child: SizedBox(
                           height: Sizes.size48,
                           child: TextField(
+                            controller: _textEditingController,
                             onTap: _onStartWriting,
                             keyboardType: TextInputType.multiline,
                             autocorrect: false,
@@ -209,7 +223,9 @@ class _VideoCommentsState extends State<VideoComments> {
                                 onTap: _stopWriting,
                                 child: FaIcon(
                                   FontAwesomeIcons.circleArrowUp,
-                                  color: Theme.of(context).primaryColor,
+                                  color: _text.isEmpty
+                                      ? Colors.grey
+                                      : Theme.of(context).primaryColor,
                                 ),
                               )
                             : Container(),

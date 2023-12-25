@@ -3,11 +3,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
 class PostVideoButton extends StatelessWidget {
-  final bool inverted;
+  final bool buttonHold;
+  final int selectedIndex;
 
   const PostVideoButton({
     super.key,
-    required this.inverted,
+    required this.buttonHold,
+    required this.selectedIndex,
   });
 
   @override
@@ -56,7 +58,11 @@ class PostVideoButton extends StatelessWidget {
             horizontal: Sizes.size12,
           ),
           decoration: BoxDecoration(
-            color: !inverted ? Colors.white : Colors.grey.shade400,
+            //Home画面でのみ colorが black ,他の画面では white を返す
+            //かつ、buttonHold(押しっぱなしの時) = trueの時は、grey.shade400　を返す
+            color: selectedIndex == 0
+                ? (buttonHold ? Colors.grey.shade400 : Colors.white)
+                : (buttonHold ? Colors.grey.shade400 : Colors.black),
             borderRadius: BorderRadius.circular(
               Sizes.size8,
             ),
@@ -64,7 +70,11 @@ class PostVideoButton extends StatelessWidget {
           child: Center(
             child: FaIcon(
               FontAwesomeIcons.plus,
-              color: !inverted ? Colors.black : Colors.white,
+              //Home画面でのみ colorが white ,他の画面では black を返す
+              //十字アイコンに関しては、画面・buttonHoldに関係なく常に white　を返す
+              color: selectedIndex == 0
+                  ? (buttonHold ? Colors.white : Colors.black)
+                  : Colors.white,
               size: Sizes.size16 + Sizes.size2,
             ),
           ),

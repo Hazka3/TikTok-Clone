@@ -14,7 +14,7 @@ class MainNavigationScreen extends StatefulWidget {
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _selectedIndex = 0;
-  bool inverted = false;
+  bool _buttonHold = false;
 
   void _onTap(int index) {
     setState(() {
@@ -37,7 +37,13 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
   void _onPostVideoButtonHold(detail) {
     setState(() {
-      inverted = !inverted;
+      _buttonHold = !_buttonHold;
+    });
+  }
+
+  void _onPostVideoButtonTapCancle() {
+    setState(() {
+      _buttonHold = false;
     });
   }
 
@@ -67,7 +73,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         ],
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.black,
+        color: _selectedIndex == 0 ? Colors.black : Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(
             Sizes.size20,
@@ -82,6 +88,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 icon: FontAwesomeIcons.house,
                 selectedIcon: FontAwesomeIcons.house,
                 onTap: () => _onTap(0),
+                selectedIndex: _selectedIndex,
               ),
               NavTab(
                 text: "Discover",
@@ -89,13 +96,16 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 icon: FontAwesomeIcons.compass,
                 selectedIcon: FontAwesomeIcons.solidCompass,
                 onTap: () => _onTap(1),
+                selectedIndex: _selectedIndex,
               ),
               GestureDetector(
                 onTap: _onPostVideoButtonTap,
                 onTapDown: _onPostVideoButtonHold,
                 onTapUp: _onPostVideoButtonHold,
+                onTapCancel: _onPostVideoButtonTapCancle,
                 child: PostVideoButton(
-                  inverted: inverted,
+                  buttonHold: _buttonHold,
+                  selectedIndex: _selectedIndex,
                 ),
               ),
               NavTab(
@@ -104,6 +114,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 icon: FontAwesomeIcons.message,
                 selectedIcon: FontAwesomeIcons.solidMessage,
                 onTap: () => _onTap(3),
+                selectedIndex: _selectedIndex,
               ),
               NavTab(
                 text: "Profile",
@@ -111,6 +122,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 icon: FontAwesomeIcons.user,
                 selectedIcon: FontAwesomeIcons.solidUser,
                 onTap: () => _onTap(4),
+                selectedIndex: _selectedIndex,
               ),
             ],
           ),

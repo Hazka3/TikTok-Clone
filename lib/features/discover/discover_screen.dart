@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
 class DiscoverScreen extends StatelessWidget {
@@ -46,6 +45,9 @@ class DiscoverScreen extends StatelessWidget {
         body: TabBarView(
           children: [
             GridView.builder(
+              padding: const EdgeInsets.all(
+                Sizes.size6,
+              ),
               itemCount: 20,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,

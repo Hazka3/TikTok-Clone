@@ -1,30 +1,138 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
-class DiscoverScreen extends StatelessWidget {
+class DiscoverScreen extends StatefulWidget {
   const DiscoverScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final tabs = [
-      "Top",
-      "Users",
-      "Videos",
-      "Sounds",
-      "LIVE",
-      "Shopping",
-      "Brands",
-    ];
+  State<DiscoverScreen> createState() => _DiscoverScreenState();
+}
 
+class _DiscoverScreenState extends State<DiscoverScreen>
+    with SingleTickerProviderStateMixin {
+  final TextEditingController _textEditingController = TextEditingController();
+
+  late TabController _tabController;
+
+  String _searchWord = "";
+
+  final tabs = [
+    "Top",
+    "Users",
+    "Videos",
+    "Sounds",
+    "LIVE",
+    "Shopping",
+    "Brands",
+  ];
+
+  void _onStopSearch() {
+    FocusScope.of(context).unfocus();
+  }
+
+  void _onClearTap() {
+    _textEditingController.clear();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(
+      length: tabs.length,
+      vsync: this,
+    );
+    _tabController.addListener(() {
+      if (!_tabController.indexIsChanging) {
+        _onStopSearch();
+      }
+    });
+    _textEditingController.addListener(() {
+      setState(() {
+        _searchWord = _textEditingController.text;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return DefaultTabController(
       length: tabs.length,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           elevation: 1,
-          title: const Text('sss'),
+          title: TextField(
+            controller: _textEditingController,
+            autocorrect: false,
+            textInputAction: TextInputAction.search,
+            decoration: InputDecoration(
+              hintText: "Search for...",
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(
+                  Sizes.size8,
+                ),
+                borderSide: BorderSide.none,
+              ),
+              filled: true,
+              fillColor: Colors.grey.shade200,
+              contentPadding: EdgeInsets.zero,
+              icon: const FaIcon(
+                FontAwesomeIcons.chevronLeft,
+                size: Sizes.size24,
+                color: Colors.black,
+              ),
+              prefixIcon: const Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.magnifyingGlass,
+                    color: Colors.black,
+                    size: Sizes.size18,
+                  ),
+                ],
+              ),
+              suffixIcon: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (_searchWord.isNotEmpty)
+                    GestureDetector(
+                      onTap: _onClearTap,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          right: Sizes.size16,
+                        ),
+                        child: FaIcon(
+                          FontAwesomeIcons.solidCircleXmark,
+                          color: Colors.grey.shade500,
+                          size: Sizes.size20,
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ),
+          actions: [
+            IconButton(
+              alignment: Alignment.centerLeft,
+              onPressed: () {},
+              icon: const FaIcon(FontAwesomeIcons.sliders),
+            ),
+          ],
           bottom: TabBar(
+            controller: _tabController,
             padding: const EdgeInsets.symmetric(
               horizontal: Sizes.size16,
             ),
@@ -45,8 +153,10 @@ class DiscoverScreen extends StatelessWidget {
           ),
         ),
         body: TabBarView(
+          controller: _tabController,
           children: [
             GridView.builder(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               padding: const EdgeInsets.all(
                 Sizes.size6,
               ),

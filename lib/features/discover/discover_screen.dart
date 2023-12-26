@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
 class DiscoverScreen extends StatelessWidget {
@@ -41,6 +42,34 @@ class DiscoverScreen extends StatelessWidget {
                 ),
             ],
           ),
+        ),
+        body: TabBarView(
+          children: [
+            GridView.builder(
+              itemCount: 20,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 9 / 16,
+                mainAxisSpacing: Sizes.size10,
+                crossAxisSpacing: Sizes.size10,
+              ),
+              itemBuilder: (context, index) => Container(
+                color: Colors.teal,
+                child: Center(
+                  child: Text("$index"),
+                ),
+              ),
+            ),
+            for (var tab in tabs.skip(1))
+              Center(
+                child: Text(
+                  tab,
+                  style: const TextStyle(
+                    fontSize: Sizes.size28,
+                  ),
+                ),
+              )
+          ],
         ),
       ),
     );

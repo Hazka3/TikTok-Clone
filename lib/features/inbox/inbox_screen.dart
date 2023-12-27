@@ -10,6 +10,7 @@ class InboxScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 1,
         title: const Text('Inbox'),
         actions: [
           IconButton(

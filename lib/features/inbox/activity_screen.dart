@@ -26,7 +26,17 @@ class _ActivityScreenState extends State<ActivityScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('All activity'),
+        title: const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('All activity'),
+            Gaps.h2,
+            FaIcon(
+              FontAwesomeIcons.chevronDown,
+              size: Sizes.size14,
+            ),
+          ],
+        ),
       ),
       body: ListView(
         children: [

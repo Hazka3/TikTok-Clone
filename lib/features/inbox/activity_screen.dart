@@ -60,7 +60,7 @@ class _ActivityScreenState extends State<ActivityScreen>
     end: Offset.zero,
   ).animate(_animationController);
 
-  void _onTitleTap() {
+  void _toggleAnimations() {
     if (_animationController.isCompleted) {
       _animationController.reverse();
     } else {
@@ -84,7 +84,7 @@ class _ActivityScreenState extends State<ActivityScreen>
     return Scaffold(
       appBar: AppBar(
         title: GestureDetector(
-          onTap: _onTitleTap,
+          onTap: _toggleAnimations,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

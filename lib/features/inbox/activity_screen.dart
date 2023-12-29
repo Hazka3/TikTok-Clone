@@ -50,7 +50,8 @@ class _ActivityScreenState extends State<ActivityScreen>
     duration: const Duration(milliseconds: 200),
   );
 
-  late final Animation<double> _animation = Tween(begin: 0.0, end: 0.5).animate(
+  late final Animation<double> _arrowAnimation =
+      Tween(begin: 0.0, end: 0.5).animate(
     _animationController,
   );
 
@@ -79,7 +80,7 @@ class _ActivityScreenState extends State<ActivityScreen>
               const Text('All activity'),
               Gaps.h2,
               RotationTransition(
-                turns: _animation,
+                turns: _arrowAnimation,
                 child: const FaIcon(
                   FontAwesomeIcons.chevronDown,
                   size: Sizes.size14,

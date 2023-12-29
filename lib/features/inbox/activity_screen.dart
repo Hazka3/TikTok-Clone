@@ -45,6 +45,8 @@ class _ActivityScreenState extends State<ActivityScreen>
     }
   ];
 
+  bool _showBarrier = false;
+
   late final AnimationController _animationController = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 200),
@@ -60,12 +62,15 @@ class _ActivityScreenState extends State<ActivityScreen>
     end: Offset.zero,
   ).animate(_animationController);
 
-  void _toggleAnimations() {
+  void _toggleAnimations() async {
     if (_animationController.isCompleted) {
-      _animationController.reverse();
+      await _animationController.reverse();
     } else {
       _animationController.forward();
     }
+    setState(() {
+      _showBarrier = !_showBarrier;
+    });
   }
 
   void _onDismissed(String notification) {

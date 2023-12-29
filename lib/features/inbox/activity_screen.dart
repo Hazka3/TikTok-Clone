@@ -18,6 +18,33 @@ class _ActivityScreenState extends State<ActivityScreen>
     (index) => "${index}h",
   );
 
+  final List<Map<String, dynamic>> _tabs = [
+    {
+      "title": "All activity",
+      "icon": FontAwesomeIcons.solidMessage,
+    },
+    {
+      "title": "Likes",
+      "icon": FontAwesomeIcons.solidHeart,
+    },
+    {
+      "title": "Comments",
+      "icon": FontAwesomeIcons.solidComments,
+    },
+    {
+      "title": "Mentions",
+      "icon": FontAwesomeIcons.at,
+    },
+    {
+      "title": "Followers",
+      "icon": FontAwesomeIcons.solidUser,
+    },
+    {
+      "title": "From TikTok",
+      "icon": FontAwesomeIcons.tiktok,
+    }
+  ];
+
   late final AnimationController _animationController = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 200),
@@ -159,6 +186,43 @@ class _ActivityScreenState extends State<ActivityScreen>
                   ),
                 ),
             ],
+          ),
+          Container(
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(
+                  Sizes.size5,
+                ),
+                bottomRight: Radius.circular(
+                  Sizes.size5,
+                ),
+              ),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                for (var tab in _tabs)
+                  ListTile(
+                    title: Row(
+                      children: [
+                        FaIcon(
+                          tab["icon"],
+                          color: Colors.black,
+                          size: Sizes.size16,
+                        ),
+                        Gaps.h20,
+                        Text(
+                          tab["title"],
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
+            ),
           ),
         ],
       ),

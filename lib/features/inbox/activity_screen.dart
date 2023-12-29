@@ -55,6 +55,11 @@ class _ActivityScreenState extends State<ActivityScreen>
     _animationController,
   );
 
+  late final Animation<Offset> _panelAnimation = Tween(
+    begin: const Offset(0, -1),
+    end: Offset.zero,
+  ).animate(_animationController);
+
   void _onTitleTap() {
     if (_animationController.isCompleted) {
       _animationController.reverse();
@@ -188,41 +193,44 @@ class _ActivityScreenState extends State<ActivityScreen>
                 ),
             ],
           ),
-          Container(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(
-                  Sizes.size5,
-                ),
-                bottomRight: Radius.circular(
-                  Sizes.size5,
+          SlideTransition(
+            position: _panelAnimation,
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(
+                    Sizes.size5,
+                  ),
+                  bottomRight: Radius.circular(
+                    Sizes.size5,
+                  ),
                 ),
               ),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                for (var tab in _tabs)
-                  ListTile(
-                    title: Row(
-                      children: [
-                        FaIcon(
-                          tab["icon"],
-                          color: Colors.black,
-                          size: Sizes.size16,
-                        ),
-                        Gaps.h20,
-                        Text(
-                          tab["title"],
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  for (var tab in _tabs)
+                    ListTile(
+                      title: Row(
+                        children: [
+                          FaIcon(
+                            tab["icon"],
+                            color: Colors.black,
+                            size: Sizes.size16,
                           ),
-                        ),
-                      ],
+                          Gaps.h20,
+                          Text(
+                            tab["title"],
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-              ],
+                ],
+              ),
             ),
           ),
         ],

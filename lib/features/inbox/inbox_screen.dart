@@ -4,10 +4,15 @@ import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/inbox/activity_screen.dart';
 import 'package:tiktok_clone/features/inbox/chats_screen.dart';
 
-class InboxScreen extends StatelessWidget {
+class InboxScreen extends StatefulWidget {
   const InboxScreen({super.key});
 
-  void _onDmPressed(BuildContext context) {
+  @override
+  State<InboxScreen> createState() => _InboxScreenState();
+}
+
+class _InboxScreenState extends State<InboxScreen> {
+  void _onDmPressed() {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const ChatsScreen(),
@@ -15,7 +20,7 @@ class InboxScreen extends StatelessWidget {
     );
   }
 
-  void _onActivitytap(BuildContext context) {
+  void _onActivitytap() {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const ActivityScreen(),
@@ -31,7 +36,7 @@ class InboxScreen extends StatelessWidget {
         title: const Text('Inbox'),
         actions: [
           IconButton(
-            onPressed: () => _onDmPressed(context),
+            onPressed: _onDmPressed,
             icon: const FaIcon(
               FontAwesomeIcons.paperPlane,
             ),
@@ -41,7 +46,7 @@ class InboxScreen extends StatelessWidget {
       body: ListView(
         children: [
           ListTile(
-            onTap: () => _onActivitytap(context),
+            onTap: _onActivitytap,
             title: const Text(
               'Activity',
               style: TextStyle(

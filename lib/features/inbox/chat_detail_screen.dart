@@ -20,11 +20,9 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
           horizontalTitleGap: Sizes.size8,
           leading: Stack(
             children: [
-              const Padding(
-                padding: EdgeInsets.all(
-                  Sizes.size3,
-                ),
-                child: Positioned(
+              const Positioned(
+                child: Padding(
+                  padding: EdgeInsets.all(Sizes.size4),
                   child: CircleAvatar(
                     radius: Sizes.size24,
                     foregroundImage: NetworkImage(

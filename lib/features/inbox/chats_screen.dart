@@ -11,12 +11,32 @@ class ChatsScreen extends StatefulWidget {
 
 class _ChatsScreenState extends State<ChatsScreen> {
   final GlobalKey<AnimatedListState> _key = GlobalKey<AnimatedListState>();
+  final Duration _duration = const Duration(milliseconds: 500);
   final List<int> _items = [];
 
   void _addItem() {
     if (_key.currentState != null) {
-      _key.currentState!.insertItem(_items.length);
+      _key.currentState!.insertItem(
+        _items.length,
+        duration: _duration,
+      );
       _items.add(_items.length);
+    }
+  }
+
+  void _deleteItem(int index) {
+    if (_key.currentState != null) {
+      _key.currentState!.removeItem(
+        index,
+        (context, animation) => SizeTransition(
+          sizeFactor: animation,
+          child: const ListTile(
+            title: Text('Bye bye'),
+          ),
+        ),
+        duration: _duration,
+      );
+      _items.removeAt(index);
     }
   }
 
@@ -49,6 +69,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
             child: SizeTransition(
               sizeFactor: animation,
               child: ListTile(
+                onLongPress: () => _deleteItem(index),
                 leading: const CircleAvatar(
                   radius: 30,
                   foregroundImage: NetworkImage(

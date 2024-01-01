@@ -30,8 +30,9 @@ class _ChatsScreenState extends State<ChatsScreen> {
         index,
         (context, animation) => SizeTransition(
           sizeFactor: animation,
-          child: const ListTile(
-            title: Text('Bye bye'),
+          child: Container(
+            color: Colors.red,
+            child: _makeTile(index),
           ),
         ),
         duration: _duration,

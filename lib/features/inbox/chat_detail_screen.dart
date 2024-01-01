@@ -76,6 +76,54 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
           ),
         ),
       ),
+      body: Stack(
+        children: [
+          ListView.separated(
+            padding: const EdgeInsets.symmetric(
+              vertical: Sizes.size20,
+              horizontal: Sizes.size14,
+            ),
+            itemBuilder: (context, index) {
+              final isMine = index % 2 == 0;
+              return Row(
+                mainAxisAlignment:
+                    isMine ? MainAxisAlignment.end : MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(
+                      Sizes.size14,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: const Radius.circular(Sizes.size20),
+                        topRight: const Radius.circular(Sizes.size20),
+                        bottomLeft: Radius.circular(
+                          isMine ? Sizes.size20 : Sizes.size5,
+                        ),
+                        bottomRight: Radius.circular(
+                          isMine ? Sizes.size5 : Sizes.size20,
+                        ),
+                      ),
+                      color:
+                          isMine ? Colors.blue : Theme.of(context).primaryColor,
+                    ),
+                    child: const Text(
+                      "This is a message!",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: Sizes.size16,
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
+            separatorBuilder: (context, index) => Gaps.v10,
+            itemCount: 10,
+          ),
+        ],
+      ),
     );
   }
 }

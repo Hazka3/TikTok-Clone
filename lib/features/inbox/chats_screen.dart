@@ -40,6 +40,41 @@ class _ChatsScreenState extends State<ChatsScreen> {
     }
   }
 
+  Widget _makeTile(int index) {
+    return ListTile(
+      onLongPress: () => _deleteItem(index),
+      leading: const CircleAvatar(
+        radius: 30,
+        foregroundImage: NetworkImage(
+          "https://avatars.githubusercontent.com/u/94900388?v=4",
+        ),
+        child: Text("は"),
+      ),
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Text(
+            'はづか $index',
+            style: const TextStyle(
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          Text(
+            "2:16 PM",
+            style: TextStyle(
+              color: Colors.grey.shade500,
+              fontSize: Sizes.size12,
+            ),
+          ),
+        ],
+      ),
+      subtitle: const Text(
+        "Don't forget to make video ^q^",
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,38 +103,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
             key: UniqueKey(),
             child: SizeTransition(
               sizeFactor: animation,
-              child: ListTile(
-                onLongPress: () => _deleteItem(index),
-                leading: const CircleAvatar(
-                  radius: 30,
-                  foregroundImage: NetworkImage(
-                    "https://avatars.githubusercontent.com/u/94900388?v=4",
-                  ),
-                  child: Text("は"),
-                ),
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      'はづか $index',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    Text(
-                      "2:16 PM",
-                      style: TextStyle(
-                        color: Colors.grey.shade500,
-                        fontSize: Sizes.size12,
-                      ),
-                    ),
-                  ],
-                ),
-                subtitle: const Text(
-                  "Don't forget to make video ^q^",
-                ),
-              ),
+              child: _makeTile(index),
             ),
           );
         },

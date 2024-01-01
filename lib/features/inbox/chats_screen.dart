@@ -10,6 +10,14 @@ class ChatsScreen extends StatefulWidget {
 }
 
 class _ChatsScreenState extends State<ChatsScreen> {
+  final GlobalKey<AnimatedListState> _key = GlobalKey<AnimatedListState>();
+
+  void _addItem() {
+    if (_key.currentState != null) {
+      _key.currentState!.insertItem(0);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,12 +28,52 @@ class _ChatsScreenState extends State<ChatsScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: _addItem,
             icon: const FaIcon(
               FontAwesomeIcons.plus,
             ),
           ),
         ],
+      ),
+      body: AnimatedList(
+        key: _key,
+        padding: const EdgeInsets.symmetric(
+          vertical: Sizes.size10,
+        ),
+        itemBuilder: (context, index, animation) {
+          return ListTile(
+            key: UniqueKey(),
+            leading: const CircleAvatar(
+              radius: 30,
+              foregroundImage: NetworkImage(
+                "https://avatars.githubusercontent.com/u/94900388?v=4",
+              ),
+              child: Text("は"),
+            ),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  'はづか $index',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                Text(
+                  "2:16 PM",
+                  style: TextStyle(
+                    color: Colors.grey.shade500,
+                    fontSize: Sizes.size12,
+                  ),
+                ),
+              ],
+            ),
+            subtitle: const Text(
+              "Don't forget to make video ^q^",
+            ),
+          );
+        },
       ),
     );
   }

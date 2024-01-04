@@ -118,6 +118,33 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 ),
               ),
               Gaps.v14,
+              const Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: Sizes.size32,
+                ),
+                child: Text(
+                  'All highlights and where to watch live matches on FIFA+ I wonder how it would loooooooooooook',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Gaps.v14,
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.link,
+                    size: Sizes.size12,
+                  ),
+                  Gaps.h4,
+                  Text(
+                    "https://github.com/Hazka3",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+              Gaps.v5,
             ],
           ),
         ),

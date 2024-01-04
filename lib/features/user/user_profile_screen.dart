@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/user/widgets/follow_count_widget.dart';
 
 class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({super.key});
@@ -37,7 +38,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 ),
                 child: Text('はづか'),
               ),
-              Gaps.v20,
+              Gaps.v14,
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -55,6 +56,41 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     color: Colors.blue.shade500,
                   ),
                 ],
+              ),
+              Gaps.v14,
+              SizedBox(
+                height: Sizes.size48,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const FollowCount(
+                      count: 37,
+                      title: "Following",
+                    ),
+                    VerticalDivider(
+                      color: Colors.grey.shade300,
+                      width: Sizes.size32,
+                      thickness: Sizes.size1,
+                      indent: Sizes.size14,
+                      endIndent: Sizes.size14,
+                    ),
+                    const FollowCount(
+                      count: 10525326,
+                      title: "Followers",
+                    ),
+                    VerticalDivider(
+                      color: Colors.grey.shade300,
+                      width: Sizes.size32,
+                      thickness: Sizes.size1,
+                      indent: Sizes.size14,
+                      endIndent: Sizes.size14,
+                    ),
+                    const FollowCount(
+                      count: 149253236,
+                      title: "Likes",
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/user/widgets/follow_count_widget.dart';
+import 'package:tiktok_clone/features/user/widgets/social_button.dart';
 
 class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({super.key});
@@ -93,28 +94,40 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 ),
               ),
               Gaps.v14,
-              FractionallySizedBox(
-                widthFactor: 0.33,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: Sizes.size12,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(
-                        Sizes.size4,
+              const Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: Sizes.size72 + Sizes.size4,
+                ),
+                child: Row(
+                  children: [
+                    SocialButton(
+                      buttonType: ButtonType.followButton,
+                      child: Text(
+                        'Follow',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
-                  ),
-                  child: const Text(
-                    'Follow',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
+                    Gaps.h6,
+                    SocialButton(
+                      buttonType: ButtonType.iconButton,
+                      child: FaIcon(
+                        FontAwesomeIcons.youtube,
+                        color: Colors.black,
+                      ),
                     ),
-                    textAlign: TextAlign.center,
-                  ),
+                    Gaps.h6,
+                    SocialButton(
+                      buttonType: ButtonType.iconButton,
+                      child: FaIcon(
+                        FontAwesomeIcons.ellipsis,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Gaps.v14,

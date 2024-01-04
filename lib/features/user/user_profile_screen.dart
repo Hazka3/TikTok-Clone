@@ -27,10 +27,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             ),
           ],
         ),
-        const SliverToBoxAdapter(
+        SliverToBoxAdapter(
           child: Column(
             children: [
-              CircleAvatar(
+              const CircleAvatar(
                 radius: 50,
                 foregroundImage: NetworkImage(
                   "https://avatars.githubusercontent.com/u/94900388?v=4",
@@ -38,6 +38,24 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 child: Text('はづか'),
               ),
               Gaps.v20,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    '@Hazka',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: Sizes.size18,
+                    ),
+                  ),
+                  Gaps.h5,
+                  FaIcon(
+                    FontAwesomeIcons.solidCircleCheck,
+                    size: Sizes.size16,
+                    color: Colors.blue.shade500,
+                  ),
+                ],
+              ),
             ],
           ),
         ),

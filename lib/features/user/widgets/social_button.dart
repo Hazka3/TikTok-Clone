@@ -7,7 +7,7 @@ enum ButtonType {
 }
 
 class SocialButton extends StatelessWidget {
-  final ButtonType? buttonType;
+  final ButtonType buttonType;
   final Widget child;
 
   const SocialButton({

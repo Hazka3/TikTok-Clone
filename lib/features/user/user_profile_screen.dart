@@ -192,6 +192,18 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     ],
                   ),
                 ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  child: const TabBarView(children: [
+                    Center(
+                      child: Text('page1'),
+                    ),
+                    Center(
+                      child: Text('page2'),
+                    ),
+                  ]),
+                ),
               ],
             ),
           ),

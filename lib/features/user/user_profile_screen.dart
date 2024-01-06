@@ -202,80 +202,71 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           children: [
             GridView.builder(
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              padding: const EdgeInsets.all(
-                Sizes.size6,
-              ),
               itemCount: 20,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 9 / 20,
-                mainAxisSpacing: Sizes.size10,
-                crossAxisSpacing: Sizes.size10,
+              padding: const EdgeInsets.only(
+                top: Sizes.size5,
               ),
-              itemBuilder: (context, index) => Column(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                childAspectRatio: 3 / 4,
+                mainAxisSpacing: Sizes.size2,
+                crossAxisSpacing: Sizes.size2,
+              ),
+              itemBuilder: (context, index) => Stack(
                 children: [
-                  Container(
-                    clipBehavior: Clip.hardEdge,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        Sizes.size4,
-                      ),
-                    ),
-                    child: AspectRatio(
-                      aspectRatio: 9 / 16,
-                      child: FadeInImage.assetNetwork(
-                        fit: BoxFit.cover,
-                        placeholder: "assets/images/placeholder.jpg",
-                        image:
-                            "https://images.unsplash.com/photo-1673844969019-c99b0c933e90?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80",
-                      ),
+                  AspectRatio(
+                    aspectRatio: 3 / 4,
+                    child: FadeInImage.assetNetwork(
+                      fit: BoxFit.cover,
+                      placeholder: "assets/images/placeholder.jpg",
+                      image:
+                          "https://images.unsplash.com/photo-1673844969019-c99b0c933e90?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80",
                     ),
                   ),
-                  Gaps.v10,
-                  const Text(
-                    "This is a very long caption for my tiktok that im upload just now currently!!",
-                    style: TextStyle(
-                      fontSize: Sizes.size16 + Sizes.size2,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Gaps.v8,
-                  DefaultTextStyle(
-                    style: TextStyle(
-                      color: Colors.grey.shade600,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  const Positioned(
+                    bottom: 0,
                     child: Row(
                       children: [
-                        const CircleAvatar(
-                          radius: 12,
-                          backgroundImage: NetworkImage(
-                            "https://avatars.githubusercontent.com/u/94900388?v=4",
+                        Icon(
+                          Icons.play_arrow_outlined,
+                          color: Colors.white,
+                          size: Sizes.size28,
+                        ),
+                        Text(
+                          '4.1M',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
                           ),
-                        ),
-                        Gaps.h4,
-                        const Expanded(
-                          child: Text(
-                            "My avatar is going to be very long!",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        Gaps.h4,
-                        FaIcon(
-                          FontAwesomeIcons.heart,
-                          size: Sizes.size16,
-                          color: Colors.grey.shade600,
-                        ),
-                        Gaps.h2,
-                        const Text(
-                          "2.5M",
                         ),
                       ],
                     ),
                   ),
+                  if (index == 0)
+                    Positioned(
+                      top: 4,
+                      left: 5,
+                      child: Container(
+                        padding:
+                            const EdgeInsets.symmetric(horizontal: Sizes.size3),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          border: Border.all(
+                            color: Colors.transparent,
+                          ),
+                          borderRadius: BorderRadius.circular(
+                            Sizes.size2,
+                          ),
+                        ),
+                        child: const Text(
+                          'Pinned',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: Sizes.size12,
+                          ),
+                        ),
+                      ),
+                    ),
                 ],
               ),
             ),

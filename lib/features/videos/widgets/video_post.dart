@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
@@ -29,6 +30,7 @@ class _VideoPostState extends State<VideoPost>
 
   bool _isPause = false;
   bool _isEllipsis = false;
+  bool _isMute = false;
 
   void _onVideoChange() {
     if (_videoPlayerController.value.isInitialized) {
@@ -91,6 +93,15 @@ class _VideoPostState extends State<VideoPost>
       builder: (context) => const VideoComments(),
     );
     _onTogglePause();
+  }
+
+  void _onMuteTap() {
+    setState(() {
+      _isMute = !_isMute;
+    });
+    if (_isMute) {
+      _videoPlayerController.setVolume(0);
+    }
   }
 
   @override
@@ -260,6 +271,25 @@ class _VideoPostState extends State<VideoPost>
                 ),
               ],
             ),
+          ),
+          Positioned(
+            top: 50,
+            left: 10,
+            child: _isMute
+                ? GestureDetector(
+                    onTap: _onMuteTap,
+                    child: const FaIcon(
+                      FontAwesomeIcons.volumeXmark,
+                      color: Colors.white,
+                    ),
+                  )
+                : GestureDetector(
+                    onTap: _onMuteTap,
+                    child: const FaIcon(
+                      FontAwesomeIcons.volumeOff,
+                      color: Colors.white,
+                    ),
+                  ),
           ),
         ],
       ),

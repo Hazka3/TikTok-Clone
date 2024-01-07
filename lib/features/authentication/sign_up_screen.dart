@@ -27,138 +27,229 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: Sizes.size40,
-          ),
-          child: Column(
-            children: [
-              Gaps.v80,
-              const Text(
-                'Sign up for TikTok',
-                style: TextStyle(
-                  fontSize: Sizes.size24,
-                  fontWeight: FontWeight.w700,
-                ),
+    return OrientationBuilder(builder: (context, orientation) {
+      print(orientation);
+      return Scaffold(
+        body: SingleChildScrollView(
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: Sizes.size40,
               ),
-              Gaps.v20,
-              const Text(
-                "Create a profile, follow other accounts, make your own videos, and more.",
-                style: TextStyle(
-                  fontSize: Sizes.size16,
-                  color: Colors.black45,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              Gaps.v40,
-              AuthButton(
-                tapButton: _onEmailTap,
-                text: "Use phone or email",
-                icon: const FaIcon(
-                  FontAwesomeIcons.user,
-                ),
-              ),
-              Gaps.v16,
-              AuthButton(
-                tapButton: _onEmailTap,
-                text: "Continue with Facebook",
-                icon: const FaIcon(
-                  FontAwesomeIcons.facebook,
-                  color: Color(0xFF1877F2),
-                ),
-              ),
-              Gaps.v16,
-              AuthButton(
-                tapButton: _onEmailTap,
-                text: "Continue with Apple",
-                icon: const FaIcon(
-                  FontAwesomeIcons.apple,
-                ),
-              ),
-              Gaps.v16,
-              AuthButton(
-                tapButton: _onEmailTap,
-                text: "Continue with Google",
-                icon: const FaIcon(
-                  FontAwesomeIcons.google,
-                ),
-              ),
-              Gaps.v16,
-              const FaIcon(
-                FontAwesomeIcons.chevronDown,
-                size: Sizes.size20,
-              ),
-              Gaps.v96,
-              Gaps.v96,
-              RichText(
-                textAlign: TextAlign.center,
-                text: const TextSpan(
-                  style: TextStyle(
-                    fontSize: Sizes.size12 + Sizes.size1,
-                    color: Colors.black45,
+              child: Column(
+                children: [
+                  Gaps.v80,
+                  const Text(
+                    'Sign up for TikTok',
+                    style: TextStyle(
+                      fontSize: Sizes.size24,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
-                  children: [
-                    TextSpan(
-                      text: "By continuing, you agree to our ",
+                  Gaps.v20,
+                  const Text(
+                    "Create a profile, follow other accounts, make your own videos, and more.",
+                    style: TextStyle(
+                      fontSize: Sizes.size16,
+                      color: Colors.black45,
                     ),
-                    TextSpan(
-                      text: "Terms of Service",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black,
+                    textAlign: TextAlign.center,
+                  ),
+                  Gaps.v40,
+                  if (orientation == Orientation.portrait) ...[
+                    AuthButton(
+                      tapButton: _onEmailTap,
+                      text: "Use phone or email",
+                      icon: const FaIcon(
+                        FontAwesomeIcons.user,
                       ),
                     ),
-                    TextSpan(
-                      text: " and acknowledge that you have read our ",
-                    ),
-                    TextSpan(
-                      text: "Privacy Policy",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black,
+                    Gaps.v16,
+                    AuthButton(
+                      tapButton: _onEmailTap,
+                      text: "Continue with Facebook",
+                      icon: const FaIcon(
+                        FontAwesomeIcons.facebook,
+                        color: Color(0xFF1877F2),
                       ),
                     ),
-                    TextSpan(
-                      text:
-                          " to learn how we collect, use, and share your data.",
+                    Gaps.v16,
+                    AuthButton(
+                      tapButton: _onEmailTap,
+                      text: "Continue with Apple",
+                      icon: const FaIcon(
+                        FontAwesomeIcons.apple,
+                      ),
                     ),
+                    Gaps.v16,
+                    AuthButton(
+                      tapButton: _onEmailTap,
+                      text: "Continue with Google",
+                      icon: const FaIcon(
+                        FontAwesomeIcons.google,
+                      ),
+                    ),
+                    Gaps.v16,
+                    const FaIcon(
+                      FontAwesomeIcons.chevronDown,
+                      size: Sizes.size20,
+                    ),
+                    Gaps.v96,
+                    Gaps.v96,
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: const TextSpan(
+                        style: TextStyle(
+                          fontSize: Sizes.size12 + Sizes.size1,
+                          color: Colors.black45,
+                        ),
+                        children: [
+                          TextSpan(
+                            text: "By continuing, you agree to our ",
+                          ),
+                          TextSpan(
+                            text: "Terms of Service",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black,
+                            ),
+                          ),
+                          TextSpan(
+                            text: " and acknowledge that you have read our ",
+                          ),
+                          TextSpan(
+                            text: "Privacy Policy",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black,
+                            ),
+                          ),
+                          TextSpan(
+                            text:
+                                " to learn how we collect, use, and share your data.",
+                          ),
+                        ],
+                      ),
+                    ),
+                    Gaps.v14,
                   ],
-                ),
+                  if (orientation == Orientation.landscape) ...[
+                    Wrap(
+                      runSpacing: 10,
+                      children: [
+                        AuthButton(
+                          tapButton: _onEmailTap,
+                          text: "Use phone or email",
+                          icon: const FaIcon(
+                            FontAwesomeIcons.user,
+                          ),
+                        ),
+                        Gaps.h16,
+                        AuthButton(
+                          tapButton: _onEmailTap,
+                          text: "Continue with Facebook",
+                          icon: const FaIcon(
+                            FontAwesomeIcons.facebook,
+                            color: Color(0xFF1877F2),
+                          ),
+                        ),
+                        Gaps.h16,
+                        AuthButton(
+                          tapButton: _onEmailTap,
+                          text: "Continue with Apple",
+                          icon: const FaIcon(
+                            FontAwesomeIcons.apple,
+                          ),
+                        ),
+                        Gaps.h16,
+                        AuthButton(
+                          tapButton: _onEmailTap,
+                          text: "Continue with Google",
+                          icon: const FaIcon(
+                            FontAwesomeIcons.google,
+                          ),
+                        ),
+                        Gaps.h16,
+                        const Center(
+                          child: FaIcon(
+                            FontAwesomeIcons.chevronDown,
+                            size: Sizes.size20,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Gaps.v40,
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: const TextSpan(
+                        style: TextStyle(
+                          fontSize: Sizes.size12 + Sizes.size1,
+                          color: Colors.black45,
+                        ),
+                        children: [
+                          TextSpan(
+                            text: "By continuing, you agree to our ",
+                          ),
+                          TextSpan(
+                            text: "Terms of Service",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black,
+                            ),
+                          ),
+                          TextSpan(
+                            text: " and acknowledge that you have read our ",
+                          ),
+                          TextSpan(
+                            text: "Privacy Policy",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black,
+                            ),
+                          ),
+                          TextSpan(
+                            text:
+                                " to learn how we collect, use, and share your data.",
+                          ),
+                        ],
+                      ),
+                    ),
+                    Gaps.v14,
+                  ],
+                ],
               ),
-            ],
+            ),
           ),
         ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        elevation: 1,
-        color: Colors.grey.shade50,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: Sizes.size32,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                "Already have an account?",
-              ),
-              Gaps.h5,
-              GestureDetector(
-                onTap: () => _onLoginTap(context),
-                child: Text(
-                  "Log In",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    color: Theme.of(context).primaryColor,
+        bottomNavigationBar: BottomAppBar(
+          elevation: 1,
+          color: Colors.grey.shade50,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: Sizes.size32,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  "Already have an account?",
+                ),
+                Gaps.h5,
+                GestureDetector(
+                  onTap: () => _onLoginTap(context),
+                  child: Text(
+                    "Log In",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: Theme.of(context).primaryColor,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

@@ -47,6 +47,12 @@ class _VideoPostState extends State<VideoPost>
         VideoPlayerController.asset("assets/videos/video.MOV");
     await _videoPlayerController.initialize();
     await _videoPlayerController.setLooping(true);
+    if (kIsWeb) {
+      await _videoPlayerController.setVolume(0);
+      setState(() {
+        _isMute = true;
+      });
+    }
     _videoPlayerController.addListener(_onVideoChange);
     setState(() {});
   }

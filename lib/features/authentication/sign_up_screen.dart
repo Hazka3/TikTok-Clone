@@ -28,7 +28,6 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OrientationBuilder(builder: (context, orientation) {
-      print(orientation);
       return Scaffold(
         body: SingleChildScrollView(
           child: SafeArea(

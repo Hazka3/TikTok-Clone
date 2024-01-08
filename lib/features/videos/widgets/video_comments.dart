@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_clone/constants/breakpoints.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
@@ -54,187 +55,194 @@ class _VideoCommentsState extends State<VideoComments> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return Container(
-      height: size.height * 0.8,
-      clipBehavior: Clip.hardEdge,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(
-          Sizes.size14,
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Container(
+        constraints: const BoxConstraints(
+          maxWidth: Breakpoints.md,
         ),
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.grey.shade50,
-        appBar: AppBar(
+        height: size.height * 0.8,
+        clipBehavior: Clip.hardEdge,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(Sizes.size14),
+            topRight: Radius.circular(Sizes.size14),
+          ),
+        ),
+        child: Scaffold(
           backgroundColor: Colors.grey.shade50,
-          automaticallyImplyLeading: false,
-          title: const Text("22796 comments"),
-          actions: [
-            IconButton(
-              onPressed: __onClosePressed,
-              icon: const FaIcon(
-                FontAwesomeIcons.xmark,
+          appBar: AppBar(
+            backgroundColor: Colors.grey.shade50,
+            automaticallyImplyLeading: false,
+            title: const Text("22796 comments"),
+            actions: [
+              IconButton(
+                onPressed: __onClosePressed,
+                icon: const FaIcon(
+                  FontAwesomeIcons.xmark,
+                ),
               ),
-            ),
-          ],
-        ),
-        body: GestureDetector(
-          onTap: _stopWriting,
-          child: Stack(
-            children: [
-              Scrollbar(
-                controller: _scrollController,
-                child: ListView.separated(
+            ],
+          ),
+          body: GestureDetector(
+            onTap: _stopWriting,
+            child: Stack(
+              children: [
+                Scrollbar(
                   controller: _scrollController,
-                  padding: const EdgeInsets.only(
-                    top: Sizes.size10,
-                    bottom: Sizes.size96 + Sizes.size20,
-                    left: Sizes.size16,
-                    right: Sizes.size16,
-                  ),
-                  itemCount: 10,
-                  separatorBuilder: (context, index) => Gaps.v20,
-                  itemBuilder: (context, index) => Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const CircleAvatar(
-                        radius: 18,
-                        child: Text('は'),
-                      ),
-                      Gaps.h10,
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                  child: ListView.separated(
+                    controller: _scrollController,
+                    padding: const EdgeInsets.only(
+                      top: Sizes.size10,
+                      bottom: Sizes.size96 + Sizes.size20,
+                      left: Sizes.size16,
+                      right: Sizes.size16,
+                    ),
+                    itemCount: 10,
+                    separatorBuilder: (context, index) => Gaps.v20,
+                    itemBuilder: (context, index) => Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const CircleAvatar(
+                          radius: 18,
+                          child: Text('は'),
+                        ),
+                        Gaps.h10,
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'はづか',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: Sizes.size14,
+                                  color: Colors.grey.shade500,
+                                ),
+                              ),
+                              Gaps.v3,
+                              const Text(
+                                  "That's not it I've seen the same thing butalsn in a cave"),
+                            ],
+                          ),
+                        ),
+                        Gaps.h10,
+                        Column(
                           children: [
+                            FaIcon(
+                              FontAwesomeIcons.heart,
+                              size: Sizes.size20,
+                              color: Colors.grey.shade500,
+                            ),
+                            Gaps.v2,
                             Text(
-                              'はづか',
+                              "52.2K",
                               style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: Sizes.size14,
                                 color: Colors.grey.shade500,
                               ),
                             ),
-                            Gaps.v3,
-                            const Text(
-                                "That's not it I've seen the same thing butalsn in a cave"),
                           ],
-                        ),
-                      ),
-                      Gaps.h10,
-                      Column(
-                        children: [
-                          FaIcon(
-                            FontAwesomeIcons.heart,
-                            size: Sizes.size20,
-                            color: Colors.grey.shade500,
-                          ),
-                          Gaps.v2,
-                          Text(
-                            "52.2K",
-                            style: TextStyle(
-                              color: Colors.grey.shade500,
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Positioned(
-                bottom: 0,
-                width: size.width,
-                child: BottomAppBar(
-                  padding: const EdgeInsets.only(
-                    left: Sizes.size16,
-                    top: Sizes.size10,
-                    bottom: Sizes.size10,
-                  ),
-                  color: Colors.white,
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 18,
-                        backgroundColor: Colors.grey.shade500,
-                        foregroundColor: Colors.white,
-                        child: const Text('は'),
-                      ),
-                      Gaps.h10,
-                      Expanded(
-                        child: SizedBox(
-                          height: Sizes.size48,
-                          child: TextField(
-                            controller: _textEditingController,
-                            onTap: _onStartWriting,
-                            keyboardType: TextInputType.multiline,
-                            autocorrect: false,
-                            expands: true,
-                            minLines: null,
-                            maxLines: null,
-                            textInputAction: TextInputAction.newline,
-                            cursorColor: Theme.of(context).primaryColor,
-                            decoration: InputDecoration(
-                              suffixIcon: Padding(
-                                padding: const EdgeInsets.only(
-                                  right: Sizes.size14,
+                Positioned(
+                  bottom: 0,
+                  width: size.width,
+                  child: BottomAppBar(
+                    padding: const EdgeInsets.only(
+                      left: Sizes.size16,
+                      top: Sizes.size10,
+                      bottom: Sizes.size10,
+                    ),
+                    color: Colors.white,
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          radius: 18,
+                          backgroundColor: Colors.grey.shade500,
+                          foregroundColor: Colors.white,
+                          child: const Text('は'),
+                        ),
+                        Gaps.h10,
+                        Expanded(
+                          child: SizedBox(
+                            height: Sizes.size48,
+                            child: TextField(
+                              controller: _textEditingController,
+                              onTap: _onStartWriting,
+                              keyboardType: TextInputType.multiline,
+                              autocorrect: false,
+                              expands: true,
+                              minLines: null,
+                              maxLines: null,
+                              textInputAction: TextInputAction.newline,
+                              cursorColor: Theme.of(context).primaryColor,
+                              decoration: InputDecoration(
+                                suffixIcon: Padding(
+                                  padding: const EdgeInsets.only(
+                                    right: Sizes.size14,
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      FaIcon(
+                                        FontAwesomeIcons.at,
+                                        color: Colors.grey.shade900,
+                                      ),
+                                      Gaps.h14,
+                                      FaIcon(
+                                        FontAwesomeIcons.gift,
+                                        color: Colors.grey.shade900,
+                                      ),
+                                      Gaps.h14,
+                                      FaIcon(
+                                        FontAwesomeIcons.faceSmile,
+                                        color: Colors.grey.shade900,
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    FaIcon(
-                                      FontAwesomeIcons.at,
-                                      color: Colors.grey.shade900,
-                                    ),
-                                    Gaps.h14,
-                                    FaIcon(
-                                      FontAwesomeIcons.gift,
-                                      color: Colors.grey.shade900,
-                                    ),
-                                    Gaps.h14,
-                                    FaIcon(
-                                      FontAwesomeIcons.faceSmile,
-                                      color: Colors.grey.shade900,
-                                    ),
-                                  ],
+                                hintText: "Add comment...",
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    Sizes.size12,
+                                  ),
+                                  borderSide: BorderSide.none,
                                 ),
-                              ),
-                              hintText: "Add comment...",
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(
-                                  Sizes.size12,
+                                filled: true,
+                                fillColor: Colors.grey.shade200,
+                                contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: Sizes.size12,
+                                  vertical: Sizes.size10,
                                 ),
-                                borderSide: BorderSide.none,
-                              ),
-                              filled: true,
-                              fillColor: Colors.grey.shade200,
-                              contentPadding: const EdgeInsets.symmetric(
-                                horizontal: Sizes.size12,
-                                vertical: Sizes.size10,
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: Sizes.size8,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: Sizes.size8,
+                          ),
+                          child: _isWriting
+                              ? GestureDetector(
+                                  onTap: _stopWriting,
+                                  child: FaIcon(
+                                    FontAwesomeIcons.circleArrowUp,
+                                    color: _text.isEmpty
+                                        ? Colors.grey
+                                        : Theme.of(context).primaryColor,
+                                  ),
+                                )
+                              : Container(),
                         ),
-                        child: _isWriting
-                            ? GestureDetector(
-                                onTap: _stopWriting,
-                                child: FaIcon(
-                                  FontAwesomeIcons.circleArrowUp,
-                                  color: _text.isEmpty
-                                      ? Colors.grey
-                                      : Theme.of(context).primaryColor,
-                                ),
-                              )
-                            : Container(),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),

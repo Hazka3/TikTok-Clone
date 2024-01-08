@@ -73,56 +73,61 @@ class _DiscoverScreenState extends State<DiscoverScreen>
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           elevation: 1,
-          title: TextField(
-            controller: _textEditingController,
-            autocorrect: false,
-            textInputAction: TextInputAction.search,
-            decoration: InputDecoration(
-              hintText: "Search for...",
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(
-                  Sizes.size8,
-                ),
-                borderSide: BorderSide.none,
-              ),
-              filled: true,
-              fillColor: Colors.grey.shade200,
-              contentPadding: EdgeInsets.zero,
-              icon: const FaIcon(
-                FontAwesomeIcons.chevronLeft,
-                size: Sizes.size24,
-                color: Colors.black,
-              ),
-              prefixIcon: const Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  FaIcon(
-                    FontAwesomeIcons.magnifyingGlass,
-                    color: Colors.black,
-                    size: Sizes.size18,
+          title: ConstrainedBox(
+            constraints: const BoxConstraints(
+              maxWidth: Breakpoints.sm,
+            ),
+            child: TextField(
+              controller: _textEditingController,
+              autocorrect: false,
+              textInputAction: TextInputAction.search,
+              decoration: InputDecoration(
+                hintText: "Search for...",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(
+                    Sizes.size8,
                   ),
-                ],
-              ),
-              suffixIcon: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (_searchWord.isNotEmpty)
-                    GestureDetector(
-                      onTap: _onClearTap,
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          right: Sizes.size16,
-                        ),
-                        child: FaIcon(
-                          FontAwesomeIcons.solidCircleXmark,
-                          color: Colors.grey.shade500,
-                          size: Sizes.size20,
+                  borderSide: BorderSide.none,
+                ),
+                filled: true,
+                fillColor: Colors.grey.shade200,
+                contentPadding: EdgeInsets.zero,
+                icon: const FaIcon(
+                  FontAwesomeIcons.chevronLeft,
+                  size: Sizes.size24,
+                  color: Colors.black,
+                ),
+                prefixIcon: const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FaIcon(
+                      FontAwesomeIcons.magnifyingGlass,
+                      color: Colors.black,
+                      size: Sizes.size18,
+                    ),
+                  ],
+                ),
+                suffixIcon: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (_searchWord.isNotEmpty)
+                      GestureDetector(
+                        onTap: _onClearTap,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            right: Sizes.size16,
+                          ),
+                          child: FaIcon(
+                            FontAwesomeIcons.solidCircleXmark,
+                            color: Colors.grey.shade500,
+                            size: Sizes.size20,
+                          ),
                         ),
                       ),
-                    ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -200,41 +205,42 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                       overflow: TextOverflow.ellipsis,
                     ),
                     Gaps.v8,
-                    if(constraints.maxWidth < 200 || constraints.maxWidth > 250)
-                    DefaultTextStyle(
-                      style: TextStyle(
-                        color: Colors.grey.shade600,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      child: Row(
-                        children: [
-                          const CircleAvatar(
-                            radius: 12,
-                            backgroundImage: NetworkImage(
-                              "https://avatars.githubusercontent.com/u/94900388?v=4",
+                    if (constraints.maxWidth < 200 ||
+                        constraints.maxWidth > 250)
+                      DefaultTextStyle(
+                        style: TextStyle(
+                          color: Colors.grey.shade600,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        child: Row(
+                          children: [
+                            const CircleAvatar(
+                              radius: 12,
+                              backgroundImage: NetworkImage(
+                                "https://avatars.githubusercontent.com/u/94900388?v=4",
+                              ),
                             ),
-                          ),
-                          Gaps.h4,
-                          const Expanded(
-                            child: Text(
-                              "My avatar is going to be very long!",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
+                            Gaps.h4,
+                            const Expanded(
+                              child: Text(
+                                "My avatar is going to be very long!",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
-                          ),
-                          Gaps.h4,
-                          FaIcon(
-                            FontAwesomeIcons.heart,
-                            size: Sizes.size16,
-                            color: Colors.grey.shade600,
-                          ),
-                          Gaps.h2,
-                          const Text(
-                            "2.5M",
-                          ),
-                        ],
+                            Gaps.h4,
+                            FaIcon(
+                              FontAwesomeIcons.heart,
+                              size: Sizes.size16,
+                              color: Colors.grey.shade600,
+                            ),
+                            Gaps.h2,
+                            const Text(
+                              "2.5M",
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
                   ],
                 ),
               ),

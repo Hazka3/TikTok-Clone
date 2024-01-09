@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/breakpoints.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/utils.dart';
 
 class DiscoverScreen extends StatefulWidget {
   const DiscoverScreen({super.key});
@@ -89,21 +90,27 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                   ),
                   borderSide: BorderSide.none,
                 ),
+                hintStyle: TextStyle(
+                  color: isDarkMode(context)
+                      ? Colors.grey.shade300
+                      : Colors.black45,
+                ),
                 filled: true,
-                fillColor: Colors.grey.shade200,
                 contentPadding: EdgeInsets.zero,
-                icon: const FaIcon(
+                icon: FaIcon(
                   FontAwesomeIcons.chevronLeft,
                   size: Sizes.size24,
-                  color: Colors.black,
+                  color: isDarkMode(context) ? Colors.white : Colors.black,
                 ),
-                prefixIcon: const Row(
+                prefixIcon: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     FaIcon(
                       FontAwesomeIcons.magnifyingGlass,
-                      color: Colors.black,
+                      color: isDarkMode(context)
+                          ? Colors.grey.shade300
+                          : Colors.black,
                       size: Sizes.size18,
                     ),
                   ],
@@ -144,9 +151,6 @@ class _DiscoverScreenState extends State<DiscoverScreen>
               horizontal: Sizes.size16,
             ),
             isScrollable: true,
-            labelColor: Colors.black,
-            unselectedLabelColor: Colors.grey.shade500,
-            indicatorColor: Colors.black,
             labelStyle: const TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: Sizes.size16,
@@ -195,9 +199,9 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                       ),
                     ),
                     Gaps.v10,
-                    Text(
-                      "${constraints.maxWidth} This is a very long caption for my tiktok that im upload just now currently!!",
-                      style: const TextStyle(
+                    const Text(
+                      "This is a very long caption for my tiktok that im upload just now currently!!",
+                      style: TextStyle(
                         fontSize: Sizes.size16 + Sizes.size2,
                         fontWeight: FontWeight.bold,
                       ),
@@ -205,11 +209,13 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                       overflow: TextOverflow.ellipsis,
                     ),
                     Gaps.v8,
-                    if (constraints.maxWidth < 200 ||
-                        constraints.maxWidth > 250)
+                    if (constraints.maxWidth < 210 ||
+                        constraints.maxWidth > 260)
                       DefaultTextStyle(
                         style: TextStyle(
-                          color: Colors.grey.shade600,
+                          color: isDarkMode(context)
+                              ? Colors.grey.shade300
+                              : Colors.grey.shade600,
                           fontWeight: FontWeight.w600,
                         ),
                         child: Row(

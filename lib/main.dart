@@ -35,6 +35,9 @@ class TikTok extends StatelessWidget {
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.grey.shade900,
         ),
+        bottomAppBarTheme: BottomAppBarTheme(
+          color: Colors.grey.shade900,
+        ),
       ),
       theme: ThemeData(
         brightness: Brightness.light,

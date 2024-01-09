@@ -68,6 +68,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+    final isDark = isDarkMode(context);
+
     return DefaultTabController(
       length: tabs.length,
       child: Scaffold(
@@ -96,6 +98,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                       : Colors.black45,
                 ),
                 filled: true,
+                fillColor: isDark ? Colors.grey.shade700 : Colors.grey.shade300,
                 contentPadding: EdgeInsets.zero,
                 icon: FaIcon(
                   FontAwesomeIcons.chevronLeft,
@@ -204,6 +207,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                       style: TextStyle(
                         fontSize: Sizes.size16 + Sizes.size2,
                         fontWeight: FontWeight.bold,
+                        height: 1.1,
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,

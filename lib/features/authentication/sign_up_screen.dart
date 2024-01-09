@@ -96,7 +96,7 @@ class SignUpScreen extends StatelessWidget {
                     size: Sizes.size20,
                   ),
                   Gaps.v96,
-                  Gaps.v96,
+                  Gaps.v60,
                   RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(
@@ -138,19 +138,18 @@ class SignUpScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Gaps.v14,
                 ],
               ),
             ),
           ),
         ),
-        bottomNavigationBar: BottomAppBar(
-          elevation: 1,
+        bottomNavigationBar: Container(
           color:
               isDarkMode(context) ? Colors.grey.shade900 : Colors.grey.shade50,
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: Sizes.size32,
+            padding: const EdgeInsets.only(
+              top: Sizes.size32,
+              bottom: Sizes.size64,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

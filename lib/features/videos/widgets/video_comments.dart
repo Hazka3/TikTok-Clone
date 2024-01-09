@@ -57,107 +57,107 @@ class _VideoCommentsState extends State<VideoComments> {
     final size = MediaQuery.of(context).size;
     final isDark = isDarkMode(context);
 
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: Container(
-        constraints: const BoxConstraints(
-          maxWidth: Breakpoints.md,
+    return Container(
+      constraints: const BoxConstraints(
+        maxWidth: Breakpoints.md,
+      ),
+      height: size.height * 0.8,
+      clipBehavior: Clip.hardEdge,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(Sizes.size14),
+          topRight: Radius.circular(Sizes.size14),
         ),
-        height: size.height * 0.8,
-        clipBehavior: Clip.hardEdge,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(Sizes.size14),
-            topRight: Radius.circular(Sizes.size14),
-          ),
-        ),
-        child: Scaffold(
+      ),
+      child: Scaffold(
+        backgroundColor: isDark ? null : Colors.grey.shade50,
+        appBar: AppBar(
           backgroundColor: isDark ? null : Colors.grey.shade50,
-          appBar: AppBar(
-            backgroundColor: isDark ? null : Colors.grey.shade50,
-            automaticallyImplyLeading: false,
-            title: const Text("22796 comments"),
-            actions: [
-              IconButton(
-                onPressed: __onClosePressed,
-                icon: const FaIcon(
-                  FontAwesomeIcons.xmark,
-                ),
+          automaticallyImplyLeading: false,
+          title: const Text("22796 comments"),
+          actions: [
+            IconButton(
+              onPressed: __onClosePressed,
+              icon: const FaIcon(
+                FontAwesomeIcons.xmark,
               ),
-            ],
-          ),
-          body: GestureDetector(
-            onTap: _stopWriting,
-            child: Stack(
-              children: [
-                Scrollbar(
+            ),
+          ],
+        ),
+        body: GestureDetector(
+          onTap: _stopWriting,
+          child: Stack(
+            children: [
+              Scrollbar(
+                controller: _scrollController,
+                child: ListView.separated(
                   controller: _scrollController,
-                  child: ListView.separated(
-                    controller: _scrollController,
-                    padding: const EdgeInsets.only(
-                      top: Sizes.size10,
-                      bottom: Sizes.size96 + Sizes.size20,
-                      left: Sizes.size16,
-                      right: Sizes.size16,
-                    ),
-                    itemCount: 10,
-                    separatorBuilder: (context, index) => Gaps.v20,
-                    itemBuilder: (context, index) => Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CircleAvatar(
-                          radius: 18,
-                          backgroundColor: isDark ? Colors.grey.shade500 : null,
-                          child: const Text('は'),
-                        ),
-                        Gaps.h10,
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'はづか',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: Sizes.size14,
-                                  color: Colors.grey.shade500,
-                                ),
-                              ),
-                              Gaps.v3,
-                              const Text(
-                                  "That's not it I've seen the same thing butalsn in a cave"),
-                            ],
-                          ),
-                        ),
-                        Gaps.h10,
-                        Column(
+                  padding: const EdgeInsets.only(
+                    top: Sizes.size10,
+                    bottom: Sizes.size96 + Sizes.size20,
+                    left: Sizes.size16,
+                    right: Sizes.size16,
+                  ),
+                  itemCount: 10,
+                  separatorBuilder: (context, index) => Gaps.v20,
+                  itemBuilder: (context, index) => Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CircleAvatar(
+                        radius: 18,
+                        backgroundColor: isDark ? Colors.grey.shade500 : null,
+                        child: const Text('は'),
+                      ),
+                      Gaps.h10,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            FaIcon(
-                              FontAwesomeIcons.heart,
-                              size: Sizes.size20,
-                              color: Colors.grey.shade500,
-                            ),
-                            Gaps.v2,
                             Text(
-                              "52.2K",
+                              'はづか',
                               style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: Sizes.size14,
                                 color: Colors.grey.shade500,
                               ),
                             ),
+                            Gaps.v3,
+                            const Text(
+                                "That's not it I've seen the same thing butalsn in a cave"),
                           ],
-                        )
-                      ],
-                    ),
+                        ),
+                      ),
+                      Gaps.h10,
+                      Column(
+                        children: [
+                          FaIcon(
+                            FontAwesomeIcons.heart,
+                            size: Sizes.size20,
+                            color: Colors.grey.shade500,
+                          ),
+                          Gaps.v2,
+                          Text(
+                            "52.2K",
+                            style: TextStyle(
+                              color: Colors.grey.shade500,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
                   ),
                 ),
-                Positioned(
-                  bottom: 0,
-                  width: size.width,
-                  child: BottomAppBar(
+              ),
+              Positioned(
+                bottom: 0,
+                width: size.width,
+                child: Container(
+                  color: Theme.of(context).appBarTheme.backgroundColor,
+                  child: Padding(
                     padding: const EdgeInsets.only(
                       left: Sizes.size16,
                       top: Sizes.size10,
-                      bottom: Sizes.size10,
+                      bottom: Sizes.size40,
                     ),
                     child: Row(
                       children: [
@@ -194,6 +194,7 @@ class _VideoCommentsState extends State<VideoComments> {
                                         color: isDark
                                             ? Colors.grey.shade200
                                             : Colors.grey.shade900,
+                                        size: Sizes.size18,
                                       ),
                                       Gaps.h14,
                                       FaIcon(
@@ -201,6 +202,7 @@ class _VideoCommentsState extends State<VideoComments> {
                                         color: isDark
                                             ? Colors.grey.shade200
                                             : Colors.grey.shade900,
+                                        size: Sizes.size18,
                                       ),
                                       Gaps.h14,
                                       FaIcon(
@@ -208,6 +210,7 @@ class _VideoCommentsState extends State<VideoComments> {
                                         color: isDark
                                             ? Colors.grey.shade200
                                             : Colors.grey.shade900,
+                                        size: Sizes.size18,
                                       ),
                                     ],
                                   ),
@@ -250,9 +253,9 @@ class _VideoCommentsState extends State<VideoComments> {
                       ],
                     ),
                   ),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
         ),
       ),

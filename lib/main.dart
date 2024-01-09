@@ -24,6 +24,7 @@ class TikTok extends StatelessWidget {
       title: "TikTok Clone",
       themeMode: ThemeMode.system,
       darkTheme: ThemeData(
+        useMaterial3: true,
         brightness: Brightness.dark,
         textTheme: Typography.whiteMountainView,
         splashFactory: NoSplash.splashFactory,
@@ -34,21 +35,33 @@ class TikTok extends StatelessWidget {
         ),
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.grey.shade900,
+          surfaceTintColor: Colors.grey.shade900,
+          elevation: 0,
+          titleTextStyle: const TextStyle(
+            color: Colors.white,
+            fontSize: Sizes.size16 + Sizes.size2,
+            fontWeight: FontWeight.w600,
+          ),
+          actionsIconTheme: const IconThemeData(
+            color: Colors.white,
+          ),
+          iconTheme: const IconThemeData(
+            color: Colors.white,
+          ),
         ),
-        bottomAppBarTheme: BottomAppBarTheme(
-          color: Colors.grey.shade900,
-        ),
-        tabBarTheme: const TabBarTheme(
+        tabBarTheme: TabBarTheme(
           indicator: UnderlineTabIndicator(
             borderSide: BorderSide(
-              color: Colors.white,
+              color: Colors.grey.shade100,
               width: 2,
             ),
           ),
           labelColor: Colors.white,
+          unselectedLabelColor: Colors.grey.shade700,
         ),
       ),
       theme: ThemeData(
+        useMaterial3: true,
         brightness: Brightness.light,
         textTheme: Typography.blackCupertino,
         splashFactory: NoSplash.splashFactory,
@@ -66,6 +79,7 @@ class TikTok extends StatelessWidget {
             fontSize: Sizes.size16 + Sizes.size2,
             fontWeight: FontWeight.w600,
           ),
+          surfaceTintColor: Colors.white,
         ),
         tabBarTheme: TabBarTheme(
           indicator: const UnderlineTabIndicator(

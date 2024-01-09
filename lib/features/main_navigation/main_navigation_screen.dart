@@ -17,7 +17,7 @@ class MainNavigationScreen extends StatefulWidget {
 }
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
-  int _selectedIndex = 4;
+  int _selectedIndex = 0;
   bool _buttonHold = false;
 
   void _onTap(int index) {
@@ -31,7 +31,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       MaterialPageRoute(
         builder: (context) => Scaffold(
           appBar: AppBar(
-            title: const Text('Record video,'),
+            title: const Text('Record video'),
           ),
         ),
         fullscreenDialog: true,
@@ -79,12 +79,14 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomAppBar(
-        elevation: 0.1,
+      bottomNavigationBar: Container(
         color: _selectedIndex == 0 || isDark ? Colors.black : Colors.white,
         child: Padding(
-          padding: const EdgeInsets.all(
-            Sizes.size20,
+          padding: const EdgeInsets.only(
+            top: Sizes.size20,
+            bottom: Sizes.size32,
+            right: Sizes.size24,
+            left: Sizes.size24,
           ),
           child: LayoutBuilder(
             builder: (context, constraints) => Row(

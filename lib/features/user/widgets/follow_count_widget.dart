@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
 class FollowCount extends StatelessWidget {
@@ -34,7 +33,6 @@ class FollowCount extends StatelessWidget {
             fontSize: Sizes.size18,
           ),
         ),
-        Gaps.v3,
         Text(
           title,
           style: TextStyle(

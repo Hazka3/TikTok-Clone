@@ -70,11 +70,11 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
               ),
             ),
             Gaps.v8,
-            const Text(
+            Text(
               "Your birthday won't be shown publicly.",
               style: TextStyle(
                 fontSize: Sizes.size16,
-                color: Colors.black54,
+                color: Colors.grey.shade500,
               ),
             ),
             Gaps.v16,
@@ -106,15 +106,13 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: SizedBox(
-          height: 300,
-          child: CupertinoDatePicker(
-            mode: CupertinoDatePickerMode.date,
-            maximumDate: initialDate,
-            initialDateTime: initialDate,
-            onDateTimeChanged: _setTextFieldDate,
-          ),
+      bottomNavigationBar: SizedBox(
+        height: 300,
+        child: CupertinoDatePicker(
+          mode: CupertinoDatePickerMode.date,
+          maximumDate: initialDate,
+          initialDateTime: initialDate,
+          onDateTimeChanged: _setTextFieldDate,
         ),
       ),
     );

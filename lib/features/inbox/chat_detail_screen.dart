@@ -163,12 +163,14 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
             Positioned(
               bottom: 0,
               width: MediaQuery.of(context).size.width,
-              child: BottomAppBar(
-                color: isDark ? null : Colors.grey.shade100,
+              child: Container(
+                color: isDark ? Colors.grey.shade900 : Colors.grey.shade100,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: Sizes.size12,
-                    horizontal: Sizes.size18,
+                  padding: const EdgeInsets.only(
+                    top: Sizes.size10,
+                    bottom: Sizes.size24,
+                    right: Sizes.size18,
+                    left: Sizes.size18,
                   ),
                   child: Row(
                     children: [

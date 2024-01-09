@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/breakpoints.dart';
+import 'package:tiktok_clone/utils.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -46,7 +47,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
               CheckboxListTile(
-                activeColor: Colors.black,
+                activeColor: isDarkMode(context) ? Colors.white : Colors.black,
                 value: _notifications,
                 onChanged: _onNotificationsChanged,
                 title: const Text(
@@ -104,6 +105,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       actions: [
                         CupertinoDialogAction(
                           onPressed: () => Navigator.of(context).pop(),
+                          isDefaultAction: true,
+                          textStyle: const TextStyle(
+                            color: Colors.blue,
+                          ),
                           child: const Text(
                             'No',
                           ),
@@ -127,7 +132,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                      icon: const FaIcon(FontAwesomeIcons.skull),
+                      icon: const FaIcon(
+                        FontAwesomeIcons.skull,
+                      ),
+                      backgroundColor:
+                          Theme.of(context).appBarTheme.backgroundColor,
                       title: const Text(
                         'Are you sure?',
                       ),
@@ -169,6 +178,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           onPressed: () => Navigator.of(context).pop,
                           child: const Text(
                             'Not log out',
+                            style: TextStyle(
+                              color: Colors.blue,
+                            ),
                           ),
                         ),
                         CupertinoActionSheetAction(

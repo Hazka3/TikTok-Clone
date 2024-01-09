@@ -25,25 +25,17 @@ class TikTok extends StatelessWidget {
       themeMode: ThemeMode.system,
       darkTheme: ThemeData(
         brightness: Brightness.dark,
+        textTheme: Typography.whiteMountainView,
         splashFactory: NoSplash.splashFactory,
         primaryColor: const Color(0xFFE9435A),
         scaffoldBackgroundColor: Colors.black,
         textSelectionTheme: const TextSelectionThemeData(
           cursorColor: Color(0xFFE9435A),
         ),
-        appBarTheme: const AppBarTheme(
-          foregroundColor: Colors.white,
-          backgroundColor: Colors.black,
-          elevation: 0,
-          titleTextStyle: TextStyle(
-            color: Colors.white,
-            fontSize: Sizes.size16 + Sizes.size2,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
       ),
       theme: ThemeData(
         brightness: Brightness.light,
+        textTheme: Typography.blackCupertino,
         splashFactory: NoSplash.splashFactory,
         primaryColor: const Color(0xFFE9435A),
         scaffoldBackgroundColor: Colors.white,

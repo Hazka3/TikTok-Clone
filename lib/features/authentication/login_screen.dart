@@ -5,6 +5,7 @@ import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/login_form_screen.dart';
 import 'package:tiktok_clone/features/authentication/username_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
+import 'package:tiktok_clone/utils.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -48,13 +49,15 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               Gaps.v20,
-              const Text(
-                "Manage your account, cheek notifications, comment on videos, and more.",
-                style: TextStyle(
-                  fontSize: Sizes .size16,
-                  color: Colors.black45,
+              const Opacity(
+                opacity: 0.7,
+                child: Text(
+                  "Manage your account, cheek notifications, comment on videos, and more.",
+                  style: TextStyle(
+                    fontSize: Sizes.size16,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
               ),
               Gaps.v40,
               AuthButton(
@@ -90,33 +93,37 @@ class LoginScreen extends StatelessWidget {
               Gaps.v96,
               RichText(
                 textAlign: TextAlign.center,
-                text: const TextSpan(
+                text: TextSpan(
                   style: TextStyle(
                     fontSize: Sizes.size12 + Sizes.size1,
-                    color: Colors.black45,
+                    color: isDarkMode(context)
+                        ? Colors.grey.shade500
+                        : Colors.black45,
                   ),
                   children: [
-                    TextSpan(
+                    const TextSpan(
                       text: "By continuing, you agree to our ",
                     ),
                     TextSpan(
                       text: "Terms of Service",
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
-                        color: Colors.black,
+                        color:
+                            isDarkMode(context) ? Colors.white : Colors.black,
                       ),
                     ),
-                    TextSpan(
+                    const TextSpan(
                       text: " and acknowledge that you have read our ",
                     ),
                     TextSpan(
                       text: "Privacy Policy",
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
-                        color: Colors.black,
+                        color:
+                            isDarkMode(context) ? Colors.white : Colors.black,
                       ),
                     ),
-                    TextSpan(
+                    const TextSpan(
                       text:
                           " to learn how we collect, use, and share your data.",
                     ),
@@ -129,7 +136,7 @@ class LoginScreen extends StatelessWidget {
       ),
       bottomNavigationBar: BottomAppBar(
         elevation: 1,
-        color: Colors.grey.shade50,
+        color: isDarkMode(context) ? Colors.grey.shade900 : Colors.grey.shade50,
         child: Padding(
           padding: const EdgeInsets.symmetric(
             vertical: Sizes.size32,

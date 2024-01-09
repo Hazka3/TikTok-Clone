@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/utils.dart';
 
 enum ButtonType {
   followButton,
@@ -18,6 +19,7 @@ class SocialButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     return Expanded(
       flex: buttonType == ButtonType.followButton ? 4 : 1,
       child: Container(
@@ -34,11 +36,11 @@ class SocialButton extends StatelessWidget {
               : Colors.white,
           borderRadius: const BorderRadius.all(
             Radius.circular(
-              Sizes.size2,
+              Sizes.size4,
             ),
           ),
           border: Border.all(
-            color: Colors.grey.shade400,
+            color: isDark ? Colors.transparent : Colors.grey.shade400,
             width: 0.5,
           ),
         ),

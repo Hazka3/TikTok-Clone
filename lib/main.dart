@@ -45,6 +45,7 @@ class TikTok extends StatelessWidget {
               width: 2,
             ),
           ),
+          labelColor: Colors.white,
         ),
       ),
       theme: ThemeData(

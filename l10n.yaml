@@ -1,0 +1,8 @@
+#翻訳ファイルの位置
+arb-dir: lib/intl
+
+#アプリのデフォルト言語が入っているファイル
+template-arb-file: intl_en.arb
+
+#生成される翻訳ファイルのパス
+output-localization-file: intl_generated.dart

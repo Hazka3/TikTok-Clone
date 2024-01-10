@@ -4,12 +4,12 @@ import 'package:tiktok_clone/utils.dart';
 
 class FormButton extends StatelessWidget {
   final bool disabled;
-  final String button_text;
+  final String buttonText;
 
   const FormButton({
     super.key,
     required this.disabled,
-    required this.button_text,
+    required this.buttonText,
   });
 
   @override
@@ -42,7 +42,7 @@ class FormButton extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
           child: Text(
-            button_text,
+            buttonText,
             textAlign: TextAlign.center,
           ),
         ),

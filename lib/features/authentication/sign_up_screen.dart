@@ -5,6 +5,7 @@ import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/username_screen.dart';
 import 'package:tiktok_clone/features/authentication/login_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
+import 'package:tiktok_clone/generated/l10n.dart';
 import 'package:tiktok_clone/utils.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -39,19 +40,19 @@ class SignUpScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Gaps.v80,
-                  const Text(
-                    'Sign up for TikTok',
-                    style: TextStyle(
+                  Text(
+                    S.of(context).signUpTitle('TikTok'),
+                    style: const TextStyle(
                       fontSize: Sizes.size24,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
                   Gaps.v20,
-                  const Opacity(
+                  Opacity(
                     opacity: 0.7,
                     child: Text(
-                      "Create a profile, follow other accounts, make your own videos, and more.",
-                      style: TextStyle(
+                      S.of(context).signUpSubtitle,
+                      style: const TextStyle(
                         fontSize: Sizes.size16,
                       ),
                       textAlign: TextAlign.center,
@@ -60,7 +61,7 @@ class SignUpScreen extends StatelessWidget {
                   Gaps.v40,
                   AuthButton(
                     tapButton: _onEmailTap,
-                    text: "Use phone or email",
+                    text: S.of(context).emailPasswordButton,
                     icon: const FaIcon(
                       FontAwesomeIcons.user,
                     ),
@@ -68,7 +69,7 @@ class SignUpScreen extends StatelessWidget {
                   Gaps.v16,
                   AuthButton(
                     tapButton: _onEmailTap,
-                    text: "Continue with Facebook",
+                    text: S.of(context).facebookButton,
                     icon: const FaIcon(
                       FontAwesomeIcons.facebook,
                       color: Color(0xFF1877F2),
@@ -77,7 +78,7 @@ class SignUpScreen extends StatelessWidget {
                   Gaps.v16,
                   AuthButton(
                     tapButton: _onEmailTap,
-                    text: "Continue with Apple",
+                    text: S.of(context).appleButton,
                     icon: const FaIcon(
                       FontAwesomeIcons.apple,
                     ),
@@ -85,7 +86,7 @@ class SignUpScreen extends StatelessWidget {
                   Gaps.v16,
                   AuthButton(
                     tapButton: _onEmailTap,
-                    text: "Continue with Google",
+                    text: S.of(context).googleButton,
                     icon: const FaIcon(
                       FontAwesomeIcons.google,
                     ),
@@ -96,7 +97,7 @@ class SignUpScreen extends StatelessWidget {
                     size: Sizes.size20,
                   ),
                   Gaps.v96,
-                  Gaps.v60,
+                  Gaps.v24,
                   RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(
@@ -154,14 +155,14 @@ class SignUpScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  "Already have an account?",
+                Text(
+                  S.of(context).alreadyHaveAnAccount,
                 ),
                 Gaps.h5,
                 GestureDetector(
                   onTap: () => _onLoginTap(context),
                   child: Text(
-                    "Log In",
+                    S.of(context).logIn,
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       color: Theme.of(context).primaryColor,

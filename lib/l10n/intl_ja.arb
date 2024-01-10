@@ -1,0 +1,19 @@
+{
+  "signUpTitle": "{nameOfTheApp} にサインアップ",
+  "@signUpTitle": {
+    "description": "The title people see when they open the app for the first time.",
+    "placeholders": {
+      "nameOfTheApp": {
+        "type": "String",
+        "example": "TikTok"
+      }
+    }
+  },
+  "signUpSubtitle": "プロフィールを作成し、他の人のアカウントを追加し、あなただけのビデオを作成しましょう。\nその他にもできることがたくさんあります!",
+  "emailPasswordButton": "メール / 電話番号 でログイン",
+  "facebookButton": "Facebook でログイン",
+  "appleButton": "Apple でログイン",
+  "googleButton": "Google でログイン",
+  "alreadyHaveAnAccount": "既にアカウントをお持ちですか？",
+  "logIn": "ログイン"
+}

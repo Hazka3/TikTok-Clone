@@ -15,5 +15,8 @@
   "appleButton": "Apple でログイン",
   "googleButton": "Google でログイン",
   "alreadyHaveAnAccount": "既にアカウントをお持ちですか？",
-  "logIn": "ログイン"
+  "logIn": "ログイン",
+  "likeCount": "{value}",
+  "commentCount": "{value}",
+  "commentTitle": "{value} のコメント"
 }

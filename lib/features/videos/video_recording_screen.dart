@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
+import 'package:tiktok_clone/constants/sizes.dart';
 
 class VideoRecordingScreen extends StatefulWidget {
   const VideoRecordingScreen({super.key});
@@ -13,22 +14,26 @@ class VideoRecordingScreen extends StatefulWidget {
 class _VideoRecordingScreenState extends State<VideoRecordingScreen> {
   bool _hasPermission = false;
 
-  late final CameraController _cameraController;
+  bool _isSelfieMode = false;
+
+  late CameraController _cameraController;
 
   Future<void> initCamera() async {
     // 使用可能なカメラ（フロントカメラ、バックカメラなど）のリストを受け取る
     final cameras = await availableCameras();
 
-//デバイスにカメラがない場合
+    //デバイスにカメラがない場合
     if (cameras.isEmpty) {
       return;
     }
 
+    //デバイスにカメラがある場合、カメラを選択する
     _cameraController = CameraController(
-      cameras[0],
+      cameras[_isSelfieMode ? 1 : 0],
       ResolutionPreset.ultraHigh,
     );
 
+    //cameraControllerを初期化
     await _cameraController.initialize();
   }
 
@@ -46,6 +51,12 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen> {
       _hasPermission = true;
       setState(() {});
     }
+  }
+
+  Future<void> _toggleSelfieMode() async {
+    _isSelfieMode = !_isSelfieMode;
+    await initCamera();
+    setState(() {});
   }
 
   @override
@@ -72,13 +83,26 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen> {
                   CircularProgressIndicator.adaptive(),
                 ],
               )
-            : Stack(
-                alignment: Alignment.center,
-                children: [
-                  CameraPreview(
-                    _cameraController,
-                  )
-                ],
+            : SafeArea(
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    CameraPreview(
+                      _cameraController,
+                    ),
+                    Positioned(
+                      top: Sizes.size10,
+                      left: Sizes.size10,
+                      child: IconButton(
+                        color: Colors.white,
+                        onPressed: _toggleSelfieMode,
+                        icon: const Icon(
+                          Icons.cameraswitch,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
       ),
     );

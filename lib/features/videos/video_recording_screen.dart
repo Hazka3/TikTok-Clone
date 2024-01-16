@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/videos/video_preview_screen.dart';
 import 'package:tiktok_clone/features/videos/widgets/recording_flashmode_button.dart';
 
 class VideoRecordingScreen extends StatefulWidget {
@@ -109,10 +110,15 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     _buttonAnimationController.reverse();
     _progressAnimationController.reset();
 
-    final file = await _cameraController.stopVideoRecording();
+    final video = await _cameraController.stopVideoRecording();
 
-    print(file.name);
-    print(file.path);
+    if (!mounted) return;
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => VideoPreviewScreen(video: video),
+      ),
+    );
   }
 
   @override

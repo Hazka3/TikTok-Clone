@@ -116,7 +116,13 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     });
   }
 
-  //Don't forget dispose controllers
+  @override
+  void dispose() {
+    _buttonAnimationController.dispose();
+    _progressAnimationController.dispose();
+    _cameraController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

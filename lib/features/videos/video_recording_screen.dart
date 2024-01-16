@@ -60,6 +60,8 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     //cameraControllerを初期化
     await _cameraController.initialize();
 
+    await _cameraController.prepareForVideoRecording();
+
     //フラッシュモードを初期化
     _flashMode = _cameraController.value.flashMode;
   }
@@ -92,14 +94,25 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     setState(() {});
   }
 
-  void _startRecording(TapDownDetails _) {
+  Future<void> _startRecording(TapDownDetails _) async {
+    if (_cameraController.value.isRecordingVideo) return;
+
+    await _cameraController.startVideoRecording();
+
     _buttonAnimationController.forward();
     _progressAnimationController.forward();
   }
 
-  void _stopRecording() {
+  Future<void> _stopRecording() async {
+    if (!_cameraController.value.isRecordingVideo) return;
+
     _buttonAnimationController.reverse();
     _progressAnimationController.reset();
+
+    final file = await _cameraController.stopVideoRecording();
+
+    print(file.name);
+    print(file.path);
   }
 
   @override

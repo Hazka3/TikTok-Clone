@@ -69,6 +69,14 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen> {
     setState(() {});
   }
 
+  void _onTapDown(TapDownDetails _) {
+    print("Start recording!!!");
+  }
+
+  void _onTapUp(TapUpDetails _) {
+    print("Stop recording!!!");
+  }
+
   @override
   void initState() {
     super.initState();
@@ -138,6 +146,21 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen> {
                             icon: Icons.flashlight_on_rounded,
                           ),
                         ],
+                      ),
+                    ),
+                    Positioned(
+                      bottom: Sizes.size40,
+                      child: GestureDetector(
+                        onTapDown: _onTapDown,
+                        onTapUp: _onTapUp,
+                        child: Container(
+                          width: Sizes.size60,
+                          height: Sizes.size60,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.red.shade400,
+                          ),
+                        ),
                       ),
                     ),
                   ],

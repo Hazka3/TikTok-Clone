@@ -81,5 +81,7 @@
 	</array>
 	<key>kTCCServiceMediaLibrary</key>
 	<string>media</string>
+	<key>FLTEnableImpeller</key>
+	<false/>
 </dict>
 </plist>

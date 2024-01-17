@@ -16,9 +16,10 @@ class VideoRecordingScreen extends StatefulWidget {
 }
 
 class _VideoRecordingScreenState extends State<VideoRecordingScreen>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, WidgetsBindingObserver {
   bool _hasPermission = false;
   bool _isSelfieMode = false;
+  bool _isAppInactive = true;
   late FlashMode _flashMode;
 
   late CameraController _cameraController;
@@ -63,6 +64,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     //cameraControllerを初期化
     await _cameraController.initialize();
 
+    //iOSでのみ実行される。動画のシンクが合わないことがある問題を防止するための機能
     await _cameraController.prepareForVideoRecording();
 
     //フラッシュモードを初期化
@@ -145,9 +147,25 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   }
 
   @override
+  Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
+    //disposeはcontrollerが初期化されていることが前提であるため、初期化されていないときは何もしない
+    if (!_hasPermission || !_cameraController.value.isInitialized) return;
+
+    if (state == AppLifecycleState.inactive) {
+      _isAppInactive = true;
+      _cameraController.dispose();
+    } else if (state == AppLifecycleState.resumed) {
+      _isAppInactive = false;
+      await initCamera();
+    }
+    setState(() {});
+  }
+
+  @override
   void initState() {
     super.initState();
     initPermission();
+    WidgetsBinding.instance.addObserver(this);
     _progressAnimationController.addListener(() {
       setState(() {});
     });
@@ -188,9 +206,11 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    CameraPreview(
-                      _cameraController,
-                    ),
+                    _cameraController.value.isInitialized && !_isAppInactive
+                        ? CameraPreview(
+                            _cameraController,
+                          )
+                        : Container(),
                     Positioned(
                       top: Sizes.size10,
                       left: Sizes.size10,

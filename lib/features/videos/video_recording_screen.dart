@@ -20,6 +20,11 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   bool _hasPermission = false;
   bool _isSelfieMode = false;
   bool _isAppInactive = true;
+
+  late final double _minZoomLevel;
+  late final double _maxZoomLevel;
+  late double _currentZoomLevel;
+
   late FlashMode _flashMode;
 
   late CameraController _cameraController;
@@ -69,6 +74,12 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
 
     //フラッシュモードを初期化
     _flashMode = _cameraController.value.flashMode;
+
+    //カメラのズーム倍率を取得
+    _minZoomLevel = await _cameraController.getMinZoomLevel();
+    _maxZoomLevel = await _cameraController.getMaxZoomLevel();
+
+    setState(() {});
   }
 
   Future<void> initPermission() async {
@@ -85,6 +96,21 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
       _hasPermission = true;
       setState(() {});
     }
+  }
+
+  Future<void> _changeZoomLevel(LongPressMoveUpdateDetails details) async {
+    //端末の最大ズーム倍率に対応して計数を変化するための処理
+    double zoomFactor = _maxZoomLevel > 100 ? 0.05 : 0.05;
+
+    //垂直方向に動いた距離を計算
+    double deltaY = -details.localOffsetFromOrigin.dy * zoomFactor;
+
+    setState(() {
+      // camera packageの setZoomLevel で1倍以下にズームアウトはできないため、最小値は1.0で固定
+      _currentZoomLevel = deltaY.clamp(_minZoomLevel, _maxZoomLevel);
+    });
+
+    await _cameraController.setZoomLevel(_currentZoomLevel);
   }
 
   Future<void> _toggleSelfieMode() async {
@@ -151,11 +177,11 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     //disposeはcontrollerが初期化されていることが前提であるため、初期化されていないときは何もしない
     if (!_hasPermission || !_cameraController.value.isInitialized) return;
 
-    if (state == AppLifecycleState.inactive) {
-      _isAppInactive = true;
-      _cameraController.dispose();
-    } else if (state == AppLifecycleState.resumed) {
+    if (state == AppLifecycleState.paused) {
       _isAppInactive = false;
+      await _cameraController.dispose();
+    } else if (state == AppLifecycleState.resumed) {
+      _isAppInactive = true;
       await initCamera();
     }
     setState(() {});
@@ -206,7 +232,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    _cameraController.value.isInitialized && !_isAppInactive
+                    _cameraController.value.isInitialized && _isAppInactive
                         ? CameraPreview(
                             _cameraController,
                           )
@@ -260,7 +286,9 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
                           GestureDetector(
                             onTapDown: _startRecording,
                             onTapUp: (details) => _stopRecording(),
+                            onLongPressMoveUpdate: _changeZoomLevel,
                             onPanEnd: (details) => _stopRecording(),
+                            onLongPressEnd: (details) => _stopRecording(),
                             child: ScaleTransition(
                               scale: _buttonAnimation,
                               child: Stack(

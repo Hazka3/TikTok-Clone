@@ -20,7 +20,12 @@ class SignUpScreen extends StatelessWidget {
   }
 
   void _onEmailTap(BuildContext context) {
-    Navigator.of(context).pushNamed(UsernameScreen.routeName);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const UsernameScreen(),
+      ),
+    );
     // Navigator.of(context).pushNamed(/
     // PageRouteBuilder(
     //   transitionsBuilder: (context, animation, secondaryAnimation, child) {

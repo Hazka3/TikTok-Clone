@@ -69,6 +69,17 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     });
   }
 
+  //URLでダイレクト遷移した場合、画面が切り替わらないバグの修正
+  @override
+  void didUpdateWidget(covariant MainNavigationScreen oldScreen) {
+    super.didUpdateWidget(oldScreen);
+    if (widget.tab != oldScreen.tab) {
+      setState(() {
+        _selectedIndex = _tabs.indexOf(widget.tab);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final isDark = isDarkMode(context);

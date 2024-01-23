@@ -12,6 +12,8 @@ import 'package:tiktok_clone/features/videos/video_preview_screen.dart';
 import 'package:tiktok_clone/features/videos/widgets/recording_flashmode_button.dart';
 
 class VideoRecordingScreen extends StatefulWidget {
+  static const String routeName = "postVideo";
+  static const String routeURL = "/upload";
   const VideoRecordingScreen({super.key});
 
   @override
@@ -220,9 +222,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     _buttonAnimationController.dispose();
     _progressAnimationController.dispose();
     if (!_noCamera) {
-      if (!_noCamera) {
-        _cameraController.dispose();
-      }
+      _cameraController.dispose();
     }
     super.dispose();
   }
@@ -254,10 +254,16 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
                             _cameraController,
                           )
                         : Container(),
+                    const Positioned(
+                        top: 0,
+                        left: Sizes.size10,
+                        child: CloseButton(
+                          color: Colors.white,
+                        )),
                     if (!_noCamera)
                       Positioned(
-                        top: Sizes.size10,
-                        left: Sizes.size10,
+                        top: Sizes.size20,
+                        left: Sizes.size20,
                         child: Column(
                           children: [
                             IconButton(

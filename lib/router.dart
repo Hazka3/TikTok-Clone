@@ -2,9 +2,11 @@ import 'package:go_router/go_router.dart';
 import 'package:tiktok_clone/common/widgets/main_navigation_screen.dart';
 import 'package:tiktok_clone/features/authentication/login_screen.dart';
 import 'package:tiktok_clone/features/authentication/sign_up_screen.dart';
+import 'package:tiktok_clone/features/inbox/activity_screen.dart';
 import 'package:tiktok_clone/features/onboarding/interests_screen.dart';
 
 final router = GoRouter(
+  initialLocation: "/inbox",
   routes: [
     GoRoute(
       name: SignUpScreen.routeName,
@@ -30,6 +32,11 @@ final router = GoRouter(
           tab: tab,
         );
       },
+    ),
+    GoRoute(
+      name: ActivityScreen.routeName,
+      path: ActivityScreen.routeURL,
+      builder: (context, state) => const ActivityScreen(),
     ),
   ],
 );

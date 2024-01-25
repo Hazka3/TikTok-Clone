@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tiktok_clone/common/widgets/main_navigation_screen.dart';
+import 'package:tiktok_clone/common/widgets/main_navigation/main_navigation_screen.dart';
 import 'package:tiktok_clone/features/authentication/login_screen.dart';
 import 'package:tiktok_clone/features/authentication/sign_up_screen.dart';
 import 'package:tiktok_clone/features/inbox/activity_screen.dart';

@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:tiktok_clone/common/widgets/settings/common_setting.dart';
+import 'package:tiktok_clone/common/widgets/settings/video_config.dart';
 import 'package:tiktok_clone/constants/breakpoints.dart';
 import 'package:tiktok_clone/utils.dart';
 
@@ -51,6 +53,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   subtitle: const Text(
                     "Change theme Dark Mode.",
                   ),
+                ),
+              ),
+              SwitchListTile.adaptive(
+                value: context.watch<VideoConfig>().isMuted,
+                onChanged: (value) =>
+                    context.read<VideoConfig>().toggleIsMuted(),
+                title: const Text(
+                  "Auto Mute",
+                ),
+                subtitle: const Text(
+                  "Videos muted by default",
                 ),
               ),
               SwitchListTile.adaptive(

@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:tiktok_clone/common/widgets/settings/video_config.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/videos/widgets/video_button.dart';
@@ -32,7 +34,6 @@ class _VideoPostState extends State<VideoPost>
 
   bool _isPause = false;
   bool _isEllipsis = false;
-  bool _isMute = false;
 
   void _onVideoChange() {
     if (_videoPlayerController.value.isInitialized) {
@@ -50,7 +51,7 @@ class _VideoPostState extends State<VideoPost>
     await _videoPlayerController.initialize();
     await _videoPlayerController.setLooping(true);
     if (kIsWeb) {
-      _onMuteTap();
+      _videoPlayerController.setVolume(0);
     }
     _videoPlayerController.addListener(_onVideoChange);
     setState(() {});
@@ -100,17 +101,6 @@ class _VideoPostState extends State<VideoPost>
     _onTogglePause();
   }
 
-  void _onMuteTap() {
-    setState(() {
-      _isMute = !_isMute;
-    });
-    if (_isMute) {
-      _videoPlayerController.setVolume(0);
-    } else {
-      _videoPlayerController.setVolume(100);
-    }
-  }
-
   @override
   void initState() {
     super.initState();
@@ -134,6 +124,12 @@ class _VideoPostState extends State<VideoPost>
 
   @override
   Widget build(BuildContext context) {
+    final isMuted = context.watch<VideoConfig>().isMuted;
+
+    if (_videoPlayerController.value.isInitialized) {
+      _videoPlayerController.setVolume(isMuted ? 0 : 100);
+    }
+
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return VisibilityDetector(
       key: Key("${widget.index}"),
@@ -283,21 +279,17 @@ class _VideoPostState extends State<VideoPost>
           Positioned(
             top: 50,
             left: 10,
-            child: _isMute
-                ? GestureDetector(
-                    onTap: _onMuteTap,
-                    child: const FaIcon(
-                      FontAwesomeIcons.volumeXmark,
-                      color: Colors.white,
-                    ),
-                  )
-                : GestureDetector(
-                    onTap: _onMuteTap,
-                    child: const FaIcon(
-                      FontAwesomeIcons.volumeOff,
-                      color: Colors.white,
-                    ),
-                  ),
+            child: IconButton(
+              icon: FaIcon(
+                context.watch<VideoConfig>().isMuted
+                    ? FontAwesomeIcons.volumeXmark
+                    : FontAwesomeIcons.volumeHigh,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                context.read<VideoConfig>().toggleIsMuted();
+              },
+            ),
           ),
         ],
       ),

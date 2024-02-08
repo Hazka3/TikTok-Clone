@@ -34,6 +34,7 @@ class _VideoPostState extends State<VideoPost>
 
   bool _isPause = false;
   bool _isEllipsis = false;
+  late bool _isMuted;
 
   void _onVideoChange() {
     if (_videoPlayerController.value.isInitialized) {
@@ -50,8 +51,10 @@ class _VideoPostState extends State<VideoPost>
         VideoPlayerController.asset("assets/videos/video.MOV");
     await _videoPlayerController.initialize();
     await _videoPlayerController.setLooping(true);
-    if (kIsWeb) {
+    if (kIsWeb || _isMuted) {
       _videoPlayerController.setVolume(0);
+    } else {
+      _videoPlayerController.setVolume(1);
     }
     _videoPlayerController.addListener(_onVideoChange);
     setState(() {});
@@ -104,6 +107,27 @@ class _VideoPostState extends State<VideoPost>
     _onTogglePause();
   }
 
+  void _onPlaybackConfigChanged() {
+    if (!mounted) return;
+    _isMuted = context.read<PlaybackConfigViewModel>().muted;
+    if (_isMuted) {
+      _videoPlayerController.setVolume(0);
+    } else {
+      _videoPlayerController.setVolume(1);
+    }
+    setState(() {});
+  }
+
+  void _onVolumeTap() {
+    _isMuted = !_isMuted;
+    if (_isMuted) {
+      _videoPlayerController.setVolume(0);
+    } else {
+      _videoPlayerController.setVolume(1);
+    }
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
@@ -116,6 +140,7 @@ class _VideoPostState extends State<VideoPost>
       duration: _animationDuration,
     );
 
+    _isMuted = context.read<PlaybackConfigViewModel>().muted;
     context
         .read<PlaybackConfigViewModel>()
         .addListener(_onPlaybackConfigChanged);
@@ -129,24 +154,8 @@ class _VideoPostState extends State<VideoPost>
     super.dispose();
   }
 
-  void _onPlaybackConfigChanged() {
-    if (!mounted) return;
-    final muted = context.read<PlaybackConfigViewModel>().muted;
-    if (muted) {
-      _videoPlayerController.setVolume(0);
-    } else {
-      _videoPlayerController.setVolume(1);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    // final isMuted = context.watch<VideoConfig>().isMuted;
-
-    // if (_videoPlayerController.value.isInitialized) {
-    //   _videoPlayerController.setVolume(isMuted ? 0 : 100);
-    // }
-
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return VisibilityDetector(
       key: Key("${widget.index}"),
@@ -298,16 +307,12 @@ class _VideoPostState extends State<VideoPost>
             left: 10,
             child: IconButton(
               icon: FaIcon(
-                context.watch<PlaybackConfigViewModel>().muted
+                _isMuted
                     ? FontAwesomeIcons.volumeXmark
                     : FontAwesomeIcons.volumeHigh,
                 color: Colors.white,
               ),
-              onPressed: () {
-                context
-                    .read<PlaybackConfigViewModel>()
-                    .setMuted(!context.read<PlaybackConfigViewModel>().muted);
-              },
+              onPressed: () => _onVolumeTap(),
             ),
           ),
         ],

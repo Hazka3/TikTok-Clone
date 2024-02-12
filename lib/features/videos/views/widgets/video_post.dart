@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/videos/view_models/playback_config_vm.dart';
@@ -12,7 +12,7 @@ import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:tiktok_clone/generated/l10n.dart';
 
-class VideoPost extends StatefulWidget {
+class VideoPost extends ConsumerStatefulWidget {
   final Function onVideoFinished;
   final int index;
 
@@ -23,10 +23,10 @@ class VideoPost extends StatefulWidget {
   });
 
   @override
-  State<VideoPost> createState() => _VideoPostState();
+  VideoPostState createState() => VideoPostState();
 }
 
-class _VideoPostState extends State<VideoPost>
+class VideoPostState extends ConsumerState<VideoPost>
     with SingleTickerProviderStateMixin {
   late final VideoPlayerController _videoPlayerController;
   late final AnimationController _animationController;
@@ -64,7 +64,7 @@ class _VideoPostState extends State<VideoPost>
     if (info.visibleFraction == 1 &&
         !_isPause &&
         !_videoPlayerController.value.isPlaying) {
-      final autoplay = context.read<PlaybackConfigViewModel>().autoplay;
+      final autoplay = ref.read(playbackConfigProvider).autoplay;
       if (autoplay) {
         _videoPlayerController.play();
       }
@@ -72,6 +72,8 @@ class _VideoPostState extends State<VideoPost>
     if (_videoPlayerController.value.isPlaying && info.visibleFraction == 0) {
       _onTogglePause();
     }
+    //他の動画から再度戻ってきた時、_isMuteの値が保持されていないようにするためにもう一度グローバルのmute値をチェック
+    _onPlaybackConfigChanged();
   }
 
   void _onTogglePause() {
@@ -109,23 +111,23 @@ class _VideoPostState extends State<VideoPost>
 
   void _onPlaybackConfigChanged() {
     if (!mounted) return;
-    _isMuted = context.read<PlaybackConfigViewModel>().muted;
-    if (_isMuted) {
-      _videoPlayerController.setVolume(0);
-    } else {
-      _videoPlayerController.setVolume(1);
-    }
+    _isMuted = ref.read(playbackConfigProvider).muted;
+    _checkVideoMute();
     setState(() {});
   }
 
   void _onVolumeTap() {
     _isMuted = !_isMuted;
+    _checkVideoMute();
+    setState(() {});
+  }
+
+  void _checkVideoMute() {
     if (_isMuted) {
       _videoPlayerController.setVolume(0);
     } else {
       _videoPlayerController.setVolume(1);
     }
-    setState(() {});
   }
 
   @override
@@ -139,11 +141,7 @@ class _VideoPostState extends State<VideoPost>
       upperBound: 1.5,
       duration: _animationDuration,
     );
-
-    _isMuted = context.read<PlaybackConfigViewModel>().muted;
-    context
-        .read<PlaybackConfigViewModel>()
-        .addListener(_onPlaybackConfigChanged);
+    _isMuted = ref.read(playbackConfigProvider).muted;
   }
 
   @override
@@ -156,6 +154,9 @@ class _VideoPostState extends State<VideoPost>
 
   @override
   Widget build(BuildContext context) {
+    ref.listen(playbackConfigProvider, (previous, next) {
+      _onPlaybackConfigChanged();
+    });
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return VisibilityDetector(
       key: Key("${widget.index}"),
@@ -312,7 +313,7 @@ class _VideoPostState extends State<VideoPost>
                     : FontAwesomeIcons.volumeHigh,
                 color: Colors.white,
               ),
-              onPressed: () => _onVolumeTap(),
+              onPressed: _onVolumeTap,
             ),
           ),
         ],

@@ -38,6 +38,11 @@ class PasswordScreenState extends ConsumerState<PasswordScreen> {
 
   void _onSubmit() {
     if (!_isPasswordLengthValid() || !_isPasswordLettersValid()) return;
+    // emailScreenでの入力内容を呼び出し
+    final state = ref.read(signUpForm.notifier).state;
+    // passwordを追加したMapで既存のstateを上書き
+    ref.read(signUpForm.notifier).state = {...state, "password": _password};
+
     Navigator.push(
       context,
       MaterialPageRoute(

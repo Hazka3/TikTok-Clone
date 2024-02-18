@@ -40,7 +40,7 @@ class PasswordScreenState extends ConsumerState<PasswordScreen> {
     if (!_isPasswordLengthValid() || !_isPasswordLettersValid()) return;
     // emailScreenでの入力内容を呼び出し
     final state = ref.read(signUpForm.notifier).state;
-    // passwordを追加したMapで既存のstateを上書き
+    // passwordを追加したMapで既存のstateを上書き。state のデータは修正はできず、上書きしかできない仕様のため、このようなロジックになっていることを忘れない
     ref.read(signUpForm.notifier).state = {...state, "password": _password};
 
     Navigator.push(

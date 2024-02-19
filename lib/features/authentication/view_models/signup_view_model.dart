@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tiktok_clone/features/authentication/repos/authentication_repo.dart';
+import 'package:tiktok_clone/utils/utils_firebase_error_snack.dart';
 
 //このVMはアカウントを作成するとき roading 画面を見せ、アカウント作成をトリガーするだけの役割を果たすので、notifer は voidを返す
 class SignUpViewModel extends AsyncNotifier<void> {
@@ -12,7 +14,7 @@ class SignUpViewModel extends AsyncNotifier<void> {
     _authRepo = ref.read(authRepo);
   }
 
-  Future<void> signUp() async {
+  Future<void> signUp(BuildContext context) async {
     state = const AsyncValue.loading();
     final form = ref.read(signUpForm);
     state = await AsyncValue.guard(
@@ -21,6 +23,9 @@ class SignUpViewModel extends AsyncNotifier<void> {
         form['password'],
       ),
     );
+    if (state.hasError) {
+      showFirebaseErrorSnack(context, state.error);
+    }
   }
 }
 

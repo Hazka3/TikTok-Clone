@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
-import 'package:tiktok_clone/utils.dart';
+import 'package:tiktok_clone/utils/utils_darkmode.dart';
 
 class InterestsButton extends StatefulWidget {
   const InterestsButton({

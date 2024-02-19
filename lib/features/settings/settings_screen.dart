@@ -8,7 +8,7 @@ import 'package:tiktok_clone/common/widgets/settings/common_setting.dart';
 import 'package:tiktok_clone/constants/breakpoints.dart';
 import 'package:tiktok_clone/features/authentication/repos/authentication_repo.dart';
 import 'package:tiktok_clone/features/videos/view_models/playback_config_vm.dart';
-import 'package:tiktok_clone/utils.dart';
+import 'package:tiktok_clone/utils/utils_darkmode.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});

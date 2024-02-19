@@ -9,7 +9,8 @@ void showFirebaseErrorSnack(
     SnackBar(
       showCloseIcon: true,
       content: Text(
-          (error as FirebaseException).message ?? "Something wen't wrong."),
+        (error as FirebaseException).message ?? "Something wen't wrong.",
+      ),
     ),
   );
 }

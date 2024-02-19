@@ -9,7 +9,7 @@ import 'package:tiktok_clone/features/main_navigation/widgets/post_video_button.
 import 'package:tiktok_clone/features/user/user_profile_screen.dart';
 import 'package:tiktok_clone/features/videos/views/video_recording_screen.dart';
 import 'package:tiktok_clone/features/videos/views/video_timeline_screen.dart';
-import 'package:tiktok_clone/utils.dart';
+import 'package:tiktok_clone/utils/utils_darkmode.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   static const String routeName = "mainNavigation";

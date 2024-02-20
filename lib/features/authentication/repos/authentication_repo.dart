@@ -16,6 +16,10 @@ class AuthenticationRepository {
     );
   }
 
+  Future<void> githubSignIn() async {
+    await _firebaseAuth.signInWithProvider(GithubAuthProvider());
+  }
+
   Future<void> signIn(String email, String password) async {
     await _firebaseAuth.signInWithEmailAndPassword(
       email: email,

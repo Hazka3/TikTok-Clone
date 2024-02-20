@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/login_screen.dart';
 import 'package:tiktok_clone/features/authentication/username_screen.dart';
+import 'package:tiktok_clone/features/authentication/view_models/social_auth_view_model.dart';
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
 import 'package:tiktok_clone/generated/l10n.dart';
 import 'package:tiktok_clone/utils/utils_darkmode.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends ConsumerWidget {
   static String routeName = "signup";
   static String routeURL = "/";
 
@@ -48,7 +50,7 @@ class SignUpScreen extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return OrientationBuilder(builder: (context, orientation) {
       return Scaffold(
         body: SingleChildScrollView(
@@ -88,11 +90,12 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   Gaps.v16,
                   AuthButton(
-                    tapButton: _onEmailTap,
-                    text: S.of(context).facebookButton,
+                    tapButton: (BuildContext context) => ref
+                        .read(socialAuthProvider.notifier)
+                        .githubSignIn(context),
+                    text: "Continue with Github",
                     icon: const FaIcon(
-                      FontAwesomeIcons.facebook,
-                      color: Color(0xFF1877F2),
+                      FontAwesomeIcons.github,
                     ),
                   ),
                   Gaps.v16,

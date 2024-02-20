@@ -20,10 +20,7 @@
     }
   },
   "signUpSubtitle": "Create a profile, follow other accounts, make your own videos, and more.",
-  "emailPasswordButton": "Use phone or email",
-  "facebookButton": "Continue with Facebook",
-  "appleButton": "Continue with Apple",
-  "googleButton": "Continue with Google",
+  "emailPasswordButton": "Use email & password",
   "alreadyHaveAnAccount": "Already have an account?",
   "logIn": "Log In",
   "likeCount": "{value}",

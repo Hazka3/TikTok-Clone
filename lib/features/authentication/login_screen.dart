@@ -7,6 +7,7 @@ import 'package:tiktok_clone/features/authentication/login_form_screen.dart';
 import 'package:tiktok_clone/features/authentication/username_screen.dart';
 import 'package:tiktok_clone/features/authentication/view_models/social_auth_view_model.dart';
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
+import 'package:tiktok_clone/generated/l10n.dart';
 import 'package:tiktok_clone/utils/utils_darkmode.dart';
 
 class LoginScreen extends ConsumerWidget {
@@ -67,7 +68,7 @@ class LoginScreen extends ConsumerWidget {
               Gaps.v40,
               AuthButton(
                 tapButton: _onEmailLoginTap,
-                text: "Use phone / email / username",
+                text: S.of(context).emailPasswordButton,
                 icon: const FaIcon(
                   FontAwesomeIcons.user,
                 ),
@@ -82,21 +83,9 @@ class LoginScreen extends ConsumerWidget {
                 ),
               ),
               Gaps.v16,
-              AuthButton(
-                tapButton: _onEmailTap,
-                text: "Continue with Google",
-                icon: const FaIcon(
-                  FontAwesomeIcons.google,
-                ),
-              ),
-              Gaps.v32,
-              const FaIcon(
-                FontAwesomeIcons.chevronDown,
-                size: Sizes.size20,
-              ),
               Gaps.v96,
               Gaps.v96,
-              Gaps.v20,
+              Gaps.v96,
               RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(

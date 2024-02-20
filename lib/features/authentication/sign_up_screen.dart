@@ -28,25 +28,6 @@ class SignUpScreen extends ConsumerWidget {
         builder: (context) => const UsernameScreen(),
       ),
     );
-    // Navigator.of(context).pushNamed(/
-    // PageRouteBuilder(
-    //   transitionsBuilder: (context, animation, secondaryAnimation, child) {
-    //     final offsetAnimation = Tween(
-    //       begin: const Offset(-1, -1),
-    //       end: Offset.zero,
-    //     ).animate(animation);
-    //     return SlideTransition(
-    //       position: offsetAnimation,
-    //       child: FadeTransition(
-    //         opacity: animation,
-    //         child: child,
-    //       ),
-    //     );
-    //   },
-    //   pageBuilder: (context, animation, secondaryAnimation) =>
-    //       const UsernameScreen(),
-    // ),
-    // );
   }
 
   @override
@@ -99,28 +80,9 @@ class SignUpScreen extends ConsumerWidget {
                     ),
                   ),
                   Gaps.v16,
-                  AuthButton(
-                    tapButton: _onEmailTap,
-                    text: S.of(context).appleButton,
-                    icon: const FaIcon(
-                      FontAwesomeIcons.apple,
-                    ),
-                  ),
-                  Gaps.v16,
-                  AuthButton(
-                    tapButton: _onEmailTap,
-                    text: S.of(context).googleButton,
-                    icon: const FaIcon(
-                      FontAwesomeIcons.google,
-                    ),
-                  ),
-                  Gaps.v16,
-                  const FaIcon(
-                    FontAwesomeIcons.chevronDown,
-                    size: Sizes.size20,
-                  ),
                   Gaps.v96,
-                  Gaps.v24,
+                  Gaps.v96,
+                  Gaps.v96,
                   RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(

@@ -32,14 +32,10 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "alreadyHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("既にアカウントをお持ちですか？"),
-        "appleButton": MessageLookupByLibrary.simpleMessage("Apple でログイン"),
         "commentCount": m0,
         "commentTitle": m1,
         "emailPasswordButton":
             MessageLookupByLibrary.simpleMessage("メール / 電話番号 でログイン"),
-        "facebookButton":
-            MessageLookupByLibrary.simpleMessage("Facebook でログイン"),
-        "googleButton": MessageLookupByLibrary.simpleMessage("Google でログイン"),
         "likeCount": m2,
         "logIn": MessageLookupByLibrary.simpleMessage("ログイン"),
         "signUpSubtitle": MessageLookupByLibrary.simpleMessage(

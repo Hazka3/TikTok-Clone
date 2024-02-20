@@ -81,41 +81,11 @@ class S {
     );
   }
 
-  /// `Use phone or email`
+  /// `Use email & password`
   String get emailPasswordButton {
     return Intl.message(
-      'Use phone or email',
+      'Use email & password',
       name: 'emailPasswordButton',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Continue with Facebook`
-  String get facebookButton {
-    return Intl.message(
-      'Continue with Facebook',
-      name: 'facebookButton',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Continue with Apple`
-  String get appleButton {
-    return Intl.message(
-      'Continue with Apple',
-      name: 'appleButton',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Continue with Google`
-  String get googleButton {
-    return Intl.message(
-      'Continue with Google',
-      name: 'googleButton',
       desc: '',
       args: [],
     );

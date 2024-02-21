@@ -4,9 +4,9 @@ import 'package:tiktok_clone/constants/breakpoints.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/settings/settings_screen.dart';
-import 'package:tiktok_clone/features/user/widgets/follow_count_widget.dart';
-import 'package:tiktok_clone/features/user/widgets/persistent_tabbar.dart';
-import 'package:tiktok_clone/features/user/widgets/social_button.dart';
+import 'package:tiktok_clone/features/users/widgets/follow_count_widget.dart';
+import 'package:tiktok_clone/features/users/widgets/persistent_tabbar.dart';
+import 'package:tiktok_clone/features/users/widgets/social_button.dart';
 
 class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({super.key});

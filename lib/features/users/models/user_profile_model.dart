@@ -12,4 +12,12 @@ class UserProfileModel {
     required this.bio,
     required this.link,
   });
+
+  //新規登録直後で、プロフィール情報がない場合に使われる
+  UserProfileModel.empty()
+      : uid = "",
+        email = "",
+        name = "",
+        bio = "",
+        link = "";
 }

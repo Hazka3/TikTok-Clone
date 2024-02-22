@@ -4,6 +4,7 @@ class UserProfileModel {
   final String name;
   final String bio;
   final String link;
+  final String birthday;
 
   UserProfileModel({
     required this.uid,
@@ -11,6 +12,7 @@ class UserProfileModel {
     required this.name,
     required this.bio,
     required this.link,
+    required this.birthday,
   });
 
   //新規登録直後で、プロフィール情報がない場合に使われる
@@ -19,5 +21,17 @@ class UserProfileModel {
         email = "",
         name = "",
         bio = "",
-        link = "";
+        link = "",
+        birthday = "";
+
+  Map<String, String> toJson() {
+    return {
+      "uid": uid,
+      "email": email,
+      "name": name,
+      "bio": bio,
+      "link": link,
+      "birthday": birthday,
+    };
+  }
 }

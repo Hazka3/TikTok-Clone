@@ -16,6 +16,7 @@ class BirthdayScreen extends ConsumerStatefulWidget {
 
 class BirthdayScreenState extends ConsumerState<BirthdayScreen> {
   final TextEditingController _birthdayController = TextEditingController();
+  String _birthday = "";
 
   late DateTime initialDate;
 
@@ -23,7 +24,11 @@ class BirthdayScreenState extends ConsumerState<BirthdayScreen> {
   void initState() {
     super.initState();
     DateTime now = DateTime.now();
-    initialDate = DateTime(now.year - 12);
+    initialDate = DateTime(
+      now.year - 12,
+      now.month,
+      now.day,
+    );
     _setTextFieldDate(initialDate);
   }
 
@@ -34,12 +39,20 @@ class BirthdayScreenState extends ConsumerState<BirthdayScreen> {
   }
 
   void _onNextTap() {
+    final state = ref.read(signUpForm.notifier).state;
+    ref.read(signUpForm.notifier).state = {
+      ...state,
+      "birthday": _birthday,
+    };
     ref.read(signUpProvider.notifier).signUp(context);
   }
 
   void _setTextFieldDate(DateTime date) {
-    final textDate = DateFormat("d MMMM yyyy").format(date);
-    _birthdayController.value = TextEditingValue(text: textDate);
+    final displayUserBirthday = DateFormat("d MMMM yyyy").format(date);
+    //database登録用に、フォーマットを yyyy/mm/dd 形式に統一
+    final userBirthday = DateFormat('yyyy/MM/dd').format(date);
+    _birthdayController.value = TextEditingValue(text: displayUserBirthday);
+    _birthday = userBirthday;
   }
 
   @override

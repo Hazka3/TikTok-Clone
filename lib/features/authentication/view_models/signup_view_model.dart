@@ -23,8 +23,8 @@ class SignUpViewModel extends AsyncNotifier<void> {
     // signUpFormの中身をロード
     final form = ref.read(signUpForm);
 
-    // signup アカウントのuidに紐づくuserを作成
-    final users = ref.read(usersProvider.notifier);
+    // signup アカウントのuidに紐づくuserprofileを作成
+    final users = ref.read(usersProfileProvider.notifier);
 
     state = await AsyncValue.guard(
       () async {
@@ -34,7 +34,12 @@ class SignUpViewModel extends AsyncNotifier<void> {
         );
 
         // userCredentialを元にuserを作成
-        await users.createProfile(userCredential);
+        await users.createProfile(
+          credential: userCredential,
+          email: form['email'],
+          name: form['name'],
+          birthday: form['birthday'],
+        );
       },
     );
     if (state.hasError) {

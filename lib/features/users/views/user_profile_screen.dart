@@ -52,6 +52,13 @@ class UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                           ? SliverAppBar(
                               actions: [
                                 IconButton(
+                                  onPressed: () {},
+                                  icon: const FaIcon(
+                                    FontAwesomeIcons.pen,
+                                    size: Sizes.size20,
+                                  ),
+                                ),
+                                IconButton(
                                   onPressed: _onGearPressed,
                                   icon: const FaIcon(
                                     FontAwesomeIcons.gear,
@@ -63,12 +70,23 @@ class UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                           : SliverAppBar(
                               title: Text(data.name),
                               actions: [
-                                IconButton(
-                                  onPressed: _onGearPressed,
-                                  icon: const FaIcon(
-                                    FontAwesomeIcons.gear,
-                                    size: Sizes.size20,
-                                  ),
+                                Row(
+                                  children: [
+                                    IconButton(
+                                      onPressed: () {},
+                                      icon: const FaIcon(
+                                        FontAwesomeIcons.pen,
+                                        size: Sizes.size20,
+                                      ),
+                                    ),
+                                    IconButton(
+                                      onPressed: _onGearPressed,
+                                      icon: const FaIcon(
+                                        FontAwesomeIcons.gear,
+                                        size: Sizes.size20,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),

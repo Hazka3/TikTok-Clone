@@ -87,6 +87,8 @@ class UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                                     children: [
                                       Avatar(
                                         name: data.name,
+                                        hasAvatar: data.hasAvatar,
+                                        uid: data.uid,
                                       ),
                                       Gaps.h40,
                                       Column(
@@ -230,6 +232,8 @@ class UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                                   Gaps.v20,
                                   Avatar(
                                     name: data.name,
+                                    hasAvatar: data.hasAvatar,
+                                    uid: data.uid,
                                   ),
                                   Gaps.v14,
                                   Row(

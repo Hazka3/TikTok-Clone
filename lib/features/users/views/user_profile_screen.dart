@@ -6,6 +6,7 @@ import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/settings/settings_screen.dart';
 import 'package:tiktok_clone/features/users/view_models/users_view_model.dart';
+import 'package:tiktok_clone/features/users/views/profile_edit_screen.dart';
 import 'package:tiktok_clone/features/users/views/widgets/avatar.dart';
 import 'package:tiktok_clone/features/users/views/widgets/follow_count_widget.dart';
 import 'package:tiktok_clone/features/users/views/widgets/persistent_tabbar.dart';
@@ -24,6 +25,15 @@ class UserProfileScreenState extends ConsumerState<UserProfileScreen> {
       MaterialPageRoute(
         builder: (context) => const SettingsScreen(),
       ),
+    );
+  }
+
+  void _onEditPressed() async {
+    await showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => const ProfileEditScreen(),
     );
   }
 
@@ -52,7 +62,7 @@ class UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                           ? SliverAppBar(
                               actions: [
                                 IconButton(
-                                  onPressed: () {},
+                                  onPressed: _onEditPressed,
                                   icon: const FaIcon(
                                     FontAwesomeIcons.pen,
                                     size: Sizes.size20,
@@ -73,7 +83,7 @@ class UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                                 Row(
                                   children: [
                                     IconButton(
-                                      onPressed: () {},
+                                      onPressed: _onEditPressed,
                                       icon: const FaIcon(
                                         FontAwesomeIcons.pen,
                                         size: Sizes.size20,

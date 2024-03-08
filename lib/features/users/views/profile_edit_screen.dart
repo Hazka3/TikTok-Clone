@@ -118,7 +118,7 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
                           SizedBox(
                             width: size.width * 0.2,
                             child: const Text(
-                              "UserName",
+                              "name",
                               textAlign: TextAlign.end,
                               style: TextStyle(
                                 fontSize: Sizes.size16,

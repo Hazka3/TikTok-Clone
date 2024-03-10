@@ -34,7 +34,7 @@ class VideoPostState extends ConsumerState<VideoPost>
 
   bool _isPause = false;
   bool _isEllipsis = false;
-  bool _isMuted = false;
+  late bool _isMuted;
 
   void _onVideoChange() {
     if (_videoPlayerController.value.isInitialized) {
@@ -51,8 +51,7 @@ class VideoPostState extends ConsumerState<VideoPost>
         VideoPlayerController.asset("assets/videos/video.MOV");
     await _videoPlayerController.initialize();
     await _videoPlayerController.setLooping(true);
-    // if (kIsWeb || _isMuted) {
-    if (kIsWeb) {
+    if (kIsWeb || _isMuted) {
       _videoPlayerController.setVolume(0);
     } else {
       _videoPlayerController.setVolume(1);
@@ -130,6 +129,7 @@ class VideoPostState extends ConsumerState<VideoPost>
   @override
   void initState() {
     super.initState();
+    _isMuted = ref.read(playbackConfigProvider).muted;
     _initVideoPlayer();
     _animationController = AnimationController(
       vsync: this,
@@ -150,6 +150,9 @@ class VideoPostState extends ConsumerState<VideoPost>
 
   @override
   Widget build(BuildContext context) {
+    ref.listen(playbackConfigProvider, (previous, next) {
+      _onPlaybackConfigChanged();
+    });
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return VisibilityDetector(
       key: Key("${widget.index}"),
@@ -301,7 +304,7 @@ class VideoPostState extends ConsumerState<VideoPost>
             left: 10,
             child: IconButton(
               icon: FaIcon(
-                ref.watch(playbackConfigProvider).muted
+                _isMuted
                     ? FontAwesomeIcons.volumeXmark
                     : FontAwesomeIcons.volumeHigh,
                 color: Colors.white,

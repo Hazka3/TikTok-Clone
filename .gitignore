@@ -76,3 +76,8 @@ web/
 windows/
 
 # End of https://www.toptal.com/developers/gitignore/api/flutter
+# flutterfire
+lib/firebase_options.dart       
+android/app/google-services.json   
+ios/Runner/GoogleService-Info.plist
+macos/Runner/GoogleService-Info.plist

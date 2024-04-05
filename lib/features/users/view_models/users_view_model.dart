@@ -55,6 +55,16 @@ class UsersViewModel extends AsyncNotifier<UserProfileModel> {
     state = AsyncValue.data(state.value!.copyWith(hasAvatar: true));
     await _usersrepository.updateUser(state.value!.uid, {"hasAvatar": true});
   }
+
+  Future<void> editUserProfile(Map<String, dynamic> data) async {
+    if (state.value == null) return;
+    state = AsyncValue.data(state.value!.copyWith(
+      name: data["name"],
+      link: data["link"],
+      bio: data["bio"],
+    ));
+    await _usersrepository.updateUser(state.value!.uid, data);
+  }
 }
 
 final usersProfileProvider =

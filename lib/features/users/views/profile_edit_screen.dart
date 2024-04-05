@@ -11,10 +11,24 @@ class ProfileEditScreen extends ConsumerStatefulWidget {
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
-      _ProfileEditScreenState();
+      ProfileEditScreenState();
 }
 
-class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
+class ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
+  TextEditingController _nameTextEditController = TextEditingController();
+  TextEditingController _linkTextEditController = TextEditingController();
+  TextEditingController _bioTextEditController = TextEditingController();
+
+  final Map<String, dynamic> _formData = {};
+
+  @override
+  void dispose() {
+    _nameTextEditController.dispose();
+    _linkTextEditController.dispose();
+    _bioTextEditController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -24,6 +38,12 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
     }
 
     void onSavePressed() {
+      setState(() {
+        _formData["name"] = _nameTextEditController.text;
+        _formData["link"] = _linkTextEditController.text;
+        _formData["bio"] = _bioTextEditController.text;
+      });
+      ref.read(usersProfileProvider.notifier).editUserProfile(_formData);
       Navigator.of(context).pop();
     }
 
@@ -35,6 +55,10 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
               child: Text(error.toString()),
             ),
         data: (data) {
+          _nameTextEditController = TextEditingController(text: data.name);
+          _linkTextEditController = TextEditingController(text: data.link);
+          _bioTextEditController = TextEditingController(text: data.bio);
+
           return Container(
             height: size.height * 0.94,
             clipBehavior: Clip.hardEdge,
@@ -128,9 +152,9 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
                           Gaps.h20,
                           Expanded(
                             child: TextFormField(
+                              controller: _nameTextEditController,
                               autocorrect: false,
                               clipBehavior: Clip.hardEdge,
-                              initialValue: data.name,
                               cursorColor: Theme.of(context).primaryColor,
                               decoration: InputDecoration(
                                 filled: true,
@@ -174,8 +198,8 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
                           Gaps.h20,
                           Expanded(
                             child: TextFormField(
+                              controller: _linkTextEditController,
                               autocorrect: false,
-                              initialValue: data.link,
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.grey.shade100,
@@ -220,7 +244,7 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
                             child: SizedBox(
                               height: Sizes.size96 + Sizes.size96,
                               child: TextFormField(
-                                initialValue: data.bio,
+                                controller: _bioTextEditController,
                                 textAlignVertical: TextAlignVertical.top,
                                 autocorrect: false,
                                 expands: true,

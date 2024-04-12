@@ -53,10 +53,22 @@ class VideoPreviewScreenState extends ConsumerState<VideoPreviewScreen> {
   }
 
   void _onUploadPressed() {
-    ref.read(uploadVideoProvider.notifier).uploadVideo(
-          File(widget.video.path),
-          context,
-        );
+    //XFile => Fileに変換
+    final convertVideo = File(widget.video.path);
+
+    //ビデオファイルの大きさをMB単位で少数第3位まで取得
+    final videosSize =
+        ((((convertVideo.lengthSync() / 1048576) * 1000).round()) / 1000);
+
+    //ファイルサイズの上限 = 5.0MB
+    if (videosSize > 5) {
+      return;
+    } else {
+      ref.read(uploadVideoProvider.notifier).uploadVideo(
+            convertVideo,
+            context,
+          );
+    }
   }
 
   @override

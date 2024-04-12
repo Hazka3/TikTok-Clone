@@ -27,8 +27,18 @@ export const onVideoCreated = functions.firestore
       //cloud functionで生成されたファイルはtmpフォルダーに一時保存され、関数の実行が完了すると消去される。なので、リアルタイムで参照するstateは入れないこと
     ]);
     const storage = admin.storage();
-    await storage.bucket().upload(`/tmp/${snapshot.id}.jpg`, {
+    const [file, _] = await storage.bucket().upload(`/tmp/${snapshot.id}.jpg`, {
       //storageにアップロードするファイルを指定　（ここでは一時保存storageから持ってきている）
       destination: `thumbnails/${snapshot.id}.jpg`, //storage/thumbnails/{snapshot.id}.jpg としてファイルを保存
     });
+    await file.makePublic();
+    await snapshot.ref.update({ thumbnailUrl: file.publicUrl() });
+
+    const db = admin.firestore();
+    await db
+      .collection("users")
+      .doc(video.creatorUid)
+      .collection("videos")
+      .doc(snapshot.id)
+      .set({ thumbnailUrl: file.publicUrl(), videoId: snapshot.id });
   });

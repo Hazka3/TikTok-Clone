@@ -52,7 +52,7 @@ class Avatar extends ConsumerWidget {
               foregroundImage: hasAvatar ? NetworkImage(
                   //NetwokrImage は画像をキャッシングするので、アバター画像を変更してもURLが同じであれば、profile画面では反映されない。
                   //この回避策として、URLにdataパラメータを任意で追加し、URLが都度変わるようにした
-                  "https://firebasestorage.googleapis.com/v0/b/clone-tiktok-uryuryuc.appspot.com/o/avatars%2F$uid?alt=media&token=6d3b9884-c2dc-4965-9276-069bf6be19e6&date=${DateTime.now().toString()}") : null,
+                  "https://firebasestorage.googleapis.com/v0/b/clone-tiktok-uryuryuc.appspot.com/o/avatars%2F$uid?alt=media&date=${DateTime.now().toString()}") : null,
               child: Text(name),
             ),
     );

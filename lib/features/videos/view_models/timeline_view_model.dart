@@ -8,22 +8,28 @@ class TimelineViewModel extends AsyncNotifier<List<VideoModel>> {
 
   List<VideoModel> _list = [];
 
-  @override
-  FutureOr<List<VideoModel>> build() async {
-    _repository = ref.read(videoRepo);
-
-    final result = await _repository.fetchVideos();
-    final newList = result.docs.map(
+  Future<List<VideoModel>> _fetchVideos({int? lastItemCreatedAt}) async {
+    final result =
+        await _repository.fetchVideos(lastItemCreatedAt: lastItemCreatedAt);
+    final videos = result.docs.map(
       (doc) => VideoModel.fromJson(
         doc.data(),
       ),
     );
+    return videos.toList();
+  }
 
-    _list = newList.toList();
-
-    //return newList.toList() のように書かない理由は、fetchしたvideos のコピーをpagenationのために一旦保持しておきたいから。
-    //例えば更新などをしてListを再構築するとき、listの要素を追加するような処理であれば、同じデータを何度も呼び出す（＝無駄なtraffic）ことはなくなるため
+  @override
+  FutureOr<List<VideoModel>> build() async {
+    _repository = ref.read(videoRepo);
+    _list = await _fetchVideos(lastItemCreatedAt: null);
     return _list;
+  }
+
+  fetchNextPage() async {
+    final nextPage =
+        await _fetchVideos(lastItemCreatedAt: _list.last.createdAt);
+    state = AsyncValue.data([..._list, ...nextPage]);
   }
 }
 

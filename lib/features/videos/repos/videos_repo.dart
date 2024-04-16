@@ -13,7 +13,10 @@ class VideosRepository {
     final fileRef = _storage.ref().child(
           "/videos/$uid/${DateTime.now().millisecondsSinceEpoch.toString()}",
         );
-    return fileRef.putFile(video);
+    return fileRef.putFile(
+      video,
+      SettableMetadata(contentType: "video/mp4,"),
+    );
   }
 
   Future<void> saveVideo(VideoModel data) async {

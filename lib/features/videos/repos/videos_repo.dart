@@ -30,10 +30,27 @@ class VideosRepository {
         .orderBy("createdAt", descending: true)
         .limit(2);
 
+    //lastItemCreatedAt ＝ nullの場合は、日付降順で上位2個のビデオを取得
+    //lastItemCreatedAt（＝取得しているビデオのうち、もっとも最新のもの）を受け取っている場合、それより新しいビデオを追加で取得。refresh用の処理
     if (lastItemCreatedAt == null) {
       return query.get();
     } else {
       return query.startAfter([lastItemCreatedAt]).get();
+    }
+  }
+
+  Future<void> toggleLikeVideo(String videoId, String userId) async {
+    final query = _db.collection("likes").doc("${videoId}000$userId");
+    final like = await query.get();
+
+    if (!like.exists) {
+      await query.set(
+        {
+          "createdAt": DateTime.now().millisecondsSinceEpoch,
+        },
+      );
+    } else {
+      await query.delete();
     }
   }
 }

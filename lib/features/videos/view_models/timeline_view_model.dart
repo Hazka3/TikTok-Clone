@@ -11,11 +11,15 @@ class TimelineViewModel extends AsyncNotifier<List<VideoModel>> {
   Future<List<VideoModel>> _fetchVideos({int? lastItemCreatedAt}) async {
     final result =
         await _repository.fetchVideos(lastItemCreatedAt: lastItemCreatedAt);
+    //取得したdoc(video)ごとに、fromJson constructorを使ってモデルを生成
     final videos = result.docs.map(
       (doc) => VideoModel.fromJson(
-        doc.data(),
+        json: doc.data(),
+        videoId: doc.id,
       ),
     );
+
+    //生成したVideoModelをリスト化して保存
     return videos.toList();
   }
 
@@ -30,6 +34,12 @@ class TimelineViewModel extends AsyncNotifier<List<VideoModel>> {
     final nextPage =
         await _fetchVideos(lastItemCreatedAt: _list.last.createdAt);
     state = AsyncValue.data([..._list, ...nextPage]);
+  }
+
+  Future<void> refresh() async {
+    final videos = await _fetchVideos(lastItemCreatedAt: null);
+    _list = videos;
+    state = AsyncValue.data(videos);
   }
 }
 

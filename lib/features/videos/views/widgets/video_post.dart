@@ -144,6 +144,7 @@ class VideoPostState extends ConsumerState<VideoPost>
       upperBound: 1.5,
       duration: _animationDuration,
     );
+    _isPause = !ref.read(playbackConfigProvider).autoplay;
     _isMuted = ref.read(playbackConfigProvider).muted;
   }
 

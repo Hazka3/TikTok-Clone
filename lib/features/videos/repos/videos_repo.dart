@@ -15,7 +15,7 @@ class VideosRepository {
         );
     return fileRef.putFile(
       video,
-      SettableMetadata(contentType: "video/mp4,"),
+      SettableMetadata(contentType: "video/mp4"),
     );
   }
 

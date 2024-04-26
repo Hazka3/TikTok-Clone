@@ -151,6 +151,9 @@ class VideoPostState extends ConsumerState<VideoPost>
     );
     _isPause = !ref.read(playbackConfigProvider).autoplay;
     _isMuted = ref.read(playbackConfigProvider).muted;
+    if (_isMuted) {
+      _animationController.reverse();
+    }
   }
 
   @override
@@ -297,7 +300,8 @@ class VideoPostState extends ConsumerState<VideoPost>
                   onTap: onLikeTap,
                   child: VideoButton(
                     icon: FontAwesomeIcons.solidHeart,
-                    text: S.of(context).likeCount(widget.videoData.likes),
+                    color: Colors.white,
+                    text: '${widget.videoData.likes}',
                   ),
                 ),
                 Gaps.v24,
@@ -305,12 +309,14 @@ class VideoPostState extends ConsumerState<VideoPost>
                   onTap: () => _onCommentsTap(context),
                   child: VideoButton(
                     icon: FontAwesomeIcons.solidComment,
+                    color: Colors.white,
                     text: S.of(context).commentCount(widget.videoData.comments),
                   ),
                 ),
                 Gaps.v24,
                 const VideoButton(
                   icon: FontAwesomeIcons.share,
+                  color: Colors.white,
                   text: "Share",
                 ),
               ],

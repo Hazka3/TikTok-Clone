@@ -53,6 +53,14 @@ class VideosRepository {
       await query.delete();
     }
   }
+
+  Future<bool> isLikedVideo(String videoId, String userId) async {
+    final query =
+        _db.collection("users").doc(userId).collection("likes").doc(videoId);
+    final like = await query.get();
+
+    return like.exists ? true : false;
+  }
 }
 
 final videoRepo = Provider(

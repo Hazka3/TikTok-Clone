@@ -44,7 +44,7 @@ export const onVideoCreated = functions.firestore
   });
 
 export const onLikedCreated = functions.firestore
-  .document("likes/{likeId}")
+  .document("users/{userId}/likes/{likeId}")
   .onCreate(async (snapshot, context) => {
     const db = admin.firestore();
     const [videoId, userId] = snapshot.id.split("000");
@@ -56,8 +56,8 @@ export const onLikedCreated = functions.firestore
           .collection("users")
           .doc(userId)
           .collection("likes")
-          .doc(videoId)
-          .set({ thumbnailUrl: thumbnailUrl, videoId: videoId });
+          .doc(snapshot.id)
+          .update({ thumbnailUrl: thumbnailUrl });
       } else {
         return;
       }
@@ -69,7 +69,7 @@ export const onLikedCreated = functions.firestore
   });
 
 export const onLikedRemoved = functions.firestore
-  .document("likes/{likeId}")
+  .document("users/{userId}/likes/{likeId}")
   .onDelete(async (snapshot, context) => {
     const db = admin.firestore();
     const [videoId, userId] = snapshot.id.split("000");
@@ -77,7 +77,7 @@ export const onLikedRemoved = functions.firestore
       .collection("users")
       .doc(userId)
       .collection("likes")
-      .doc(videoId)
+      .doc(snapshot.id)
       .delete();
     await db
       .collection("videos")

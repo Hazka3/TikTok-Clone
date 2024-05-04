@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/inbox/view_models/messages_vide_model.dart';
 import 'package:tiktok_clone/utils/utils_darkmode.dart';
 
-class ChatDetailScreen extends StatefulWidget {
+class ChatDetailScreen extends ConsumerStatefulWidget {
   static const String routeName = "chatDetail";
   static const String routeURL = ":chatId";
 
@@ -16,10 +18,10 @@ class ChatDetailScreen extends StatefulWidget {
   });
 
   @override
-  State<ChatDetailScreen> createState() => _ChatDetailScreenState();
+  ConsumerState<ChatDetailScreen> createState() => ChatDetailScreenState();
 }
 
-class _ChatDetailScreenState extends State<ChatDetailScreen> {
+class ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
   final TextEditingController _textEditingController = TextEditingController();
   String _inputText = "";
   bool _isWriting = false;
@@ -35,6 +37,16 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
     setState(() {
       _isWriting = false;
     });
+  }
+
+  void _onSendPress() {
+    final text = _textEditingController.text;
+    if (text == "") {
+      return;
+    } else {
+      ref.read(messagesProvider.notifier).sendMessage(text);
+      _textEditingController.text = "";
+    }
   }
 
   @override
@@ -55,6 +67,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isLoading = ref.watch(messagesProvider).isLoading;
     final isDark = isDarkMode(context);
     return Scaffold(
       appBar: AppBar(
@@ -250,9 +263,11 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                                     : Colors.grey.shade400,
                               ),
                               child: IconButton(
-                                onPressed: () {},
-                                icon: const FaIcon(
-                                  FontAwesomeIcons.paperPlane,
+                                onPressed: isLoading ? null : _onSendPress,
+                                icon: FaIcon(
+                                  isLoading
+                                      ? FontAwesomeIcons.hourglass
+                                      : FontAwesomeIcons.paperPlane,
                                   color: Colors.white,
                                   size: Sizes.size18,
                                 ),

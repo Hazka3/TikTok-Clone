@@ -241,17 +241,21 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                       Gaps.h16,
                       _isWriting || _inputText.isNotEmpty
                           ? Container(
-                              padding: const EdgeInsets.all(Sizes.size10),
+                              height: 40,
+                              width: 40,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: _inputText.isNotEmpty
                                     ? Theme.of(context).primaryColor
                                     : Colors.grey.shade400,
                               ),
-                              child: const FaIcon(
-                                FontAwesomeIcons.paperPlane,
-                                color: Colors.white,
-                                size: Sizes.size20,
+                              child: IconButton(
+                                onPressed: () {},
+                                icon: const FaIcon(
+                                  FontAwesomeIcons.paperPlane,
+                                  color: Colors.white,
+                                  size: Sizes.size18,
+                                ),
                               ),
                             )
                           : Container(),

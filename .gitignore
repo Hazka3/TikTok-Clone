@@ -74,6 +74,7 @@ pubspec.lock
 tiktok_clone.iml
 web/
 windows/
+.idea/
 
 # End of https://www.toptal.com/developers/gitignore/api/flutter
 # flutterfire

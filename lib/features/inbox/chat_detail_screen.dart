@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/authentication/repos/authentication_repo.dart';
 import 'package:tiktok_clone/features/inbox/view_models/messages_vide_model.dart';
 import 'package:tiktok_clone/utils/utils_darkmode.dart';
 
@@ -134,53 +135,70 @@ class ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
         onTap: _stopWriting,
         child: Stack(
           children: [
-            ListView.separated(
-              padding: const EdgeInsets.only(
-                right: Sizes.size20,
-                left: Sizes.size20,
-                top: Sizes.size14,
-                bottom: Sizes.size96 + Sizes.size20,
-              ),
-              itemBuilder: (context, index) {
-                final isMine = index % 2 == 0;
-                return Row(
-                  mainAxisAlignment:
-                      isMine ? MainAxisAlignment.end : MainAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(
-                        Sizes.size14,
+            ref.watch(chatProvider).when(
+                  data: (data) {
+                    return ListView.separated(
+                      reverse: true,
+                      padding: EdgeInsets.only(
+                        right: Sizes.size20,
+                        left: Sizes.size20,
+                        top: Sizes.size14,
+                        bottom: MediaQuery.of(context).padding.bottom +
+                            Sizes.size96,
                       ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: const Radius.circular(Sizes.size20),
-                          topRight: const Radius.circular(Sizes.size20),
-                          bottomLeft: Radius.circular(
-                            isMine ? Sizes.size20 : Sizes.size5,
-                          ),
-                          bottomRight: Radius.circular(
-                            isMine ? Sizes.size5 : Sizes.size20,
-                          ),
-                        ),
-                        color: isMine
-                            ? Colors.blue
-                            : Theme.of(context).primaryColor,
-                      ),
-                      child: const Text(
-                        "This is a message!",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: Sizes.size16,
-                        ),
-                      ),
+                      itemBuilder: (context, index) {
+                        final message = data[index];
+                        final isMine =
+                            message.userId == ref.watch(authRepo).user!.uid;
+                        return Row(
+                          mainAxisAlignment: isMine
+                              ? MainAxisAlignment.end
+                              : MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(
+                                Sizes.size14,
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: const Radius.circular(Sizes.size20),
+                                  topRight: const Radius.circular(Sizes.size20),
+                                  bottomLeft: Radius.circular(
+                                    isMine ? Sizes.size20 : Sizes.size5,
+                                  ),
+                                  bottomRight: Radius.circular(
+                                    isMine ? Sizes.size5 : Sizes.size20,
+                                  ),
+                                ),
+                                color: isMine
+                                    ? Colors.blue
+                                    : Theme.of(context).primaryColor,
+                              ),
+                              child: Text(
+                                message.text,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: Sizes.size16,
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                      separatorBuilder: (context, index) => Gaps.v10,
+                      itemCount: data.length,
+                    );
+                  },
+                  loading: () => const Center(
+                    child: CircularProgressIndicator.adaptive(),
+                  ),
+                  error: (error, stackTrace) => Center(
+                    child: Text(
+                      error.toString(),
                     ),
-                  ],
-                );
-              },
-              separatorBuilder: (context, index) => Gaps.v10,
-              itemCount: 10,
-            ),
+                  ),
+                ),
             Positioned(
               bottom: 0,
               width: MediaQuery.of(context).size.width,

@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/repos/authentication_repo.dart';
-import 'package:tiktok_clone/features/inbox/view_models/messages_vide_model.dart';
+import 'package:tiktok_clone/features/inbox/view_models/messages_view_model.dart';
 import 'package:tiktok_clone/utils/utils_darkmode.dart';
 
 class ChatDetailScreen extends ConsumerStatefulWidget {

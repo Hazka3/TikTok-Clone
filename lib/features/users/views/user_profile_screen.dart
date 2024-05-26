@@ -5,7 +5,7 @@ import 'package:tiktok_clone/constants/breakpoints.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/settings/settings_screen.dart';
-import 'package:tiktok_clone/features/users/view_models/users_view_model.dart';
+import 'package:tiktok_clone/features/users/view_models/users_profile_view_model.dart';
 import 'package:tiktok_clone/features/users/views/profile_edit_screen.dart';
 import 'package:tiktok_clone/features/users/views/widgets/avatar.dart';
 import 'package:tiktok_clone/features/users/views/widgets/follow_count_widget.dart';

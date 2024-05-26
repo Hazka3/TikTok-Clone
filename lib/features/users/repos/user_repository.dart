@@ -29,6 +29,13 @@ class UserRepository {
   Future<void> updateUser(String uid, Map<String, dynamic> data) async {
     await _db.collection("users").doc(uid).update(data);
   }
+
+  Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>> fetchUserList(
+      String uid) async {
+    final doc =
+        await _db.collection("users").where("uid", isNotEqualTo: uid).get();
+    return doc.docs;
+  }
 }
 
 final userRepo = Provider((ref) => UserRepository());

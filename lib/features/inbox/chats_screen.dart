@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/inbox/chat_detail_screen.dart';
+import 'package:tiktok_clone/features/inbox/user_list_screen.dart';
 
 class ChatsScreen extends StatefulWidget {
   static const String routeName = "chats";
@@ -53,6 +54,14 @@ class _ChatsScreenState extends State<ChatsScreen> {
     );
   }
 
+  void _onUserPressed() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const UserListScreen(),
+      ),
+    );
+  }
+
   Widget _makeTile(int index) {
     return ListTile(
       onTap: () => _onChatTap(index),
@@ -93,11 +102,16 @@ class _ChatsScreenState extends State<ChatsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         elevation: 1,
         title: const Text(
           "Direct messages",
         ),
         actions: [
+          IconButton(
+            onPressed: _onUserPressed,
+            icon: const FaIcon(FontAwesomeIcons.a),
+          ),
           IconButton(
             onPressed: _addItem,
             icon: const FaIcon(

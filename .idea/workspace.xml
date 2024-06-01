@@ -6,14 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="f447bdfb-964d-4dce-962d-046869a81ad5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/videos/views/widgets/video_post.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/videos/views/widgets/video_post.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/hazka/.android/avd/Pixel_XL_API_34.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/hazka/.android/avd/Pixel_6_Pro_API_34.avd]" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -44,11 +43,15 @@
     "cidr.known.project.marker": "true",
     "com.intellij.openapi.externalSystem.service.settings.ExternalSystemGroupConfigurable": "ALL",
     "dart.analysis.tool.window.visible": "false",
+    "io.flutter.reload.alreadyRun": "true",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
     "show.migrate.to.gradle.popup": "false"
   }
 }]]></component>
-  <component name="RunManager" selected="Android App.tiktok_colne">
+  <component name="RunManager" selected="Flutter.main.dart">
     <configuration name="tiktok_colne" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="tiktok_clone_android" />
       <option name="DEPLOY" value="true" />
